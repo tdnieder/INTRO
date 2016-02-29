@@ -9,5 +9,5 @@ Generated_Code/
 /*.xml
 /*.txt
 !/readme.txt
-/.metadata
+/.metadata/
 /RemoteSystemsTempFiles
