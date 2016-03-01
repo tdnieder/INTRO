@@ -36,7 +36,11 @@
 #include "LEDRED.h"
 #include "LEDpin1.h"
 #include "BitIoLdd1.h"
+#include "LED2.h"
+#include "LEDpin2.h"
+#include "BitIoLdd2.h"
 #include "WAIT1.h"
+#include "LED1.h"
 
 #ifdef __cplusplus
 extern "C" {
