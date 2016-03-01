@@ -123,4 +123,5 @@
 			<resource resourceType="PROJECT" workspacePath="/TestProject"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>
