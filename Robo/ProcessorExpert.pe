@@ -3,7 +3,7 @@
   <Header>
     <Name>Robo</Name>
     <SavedBy>Ueli</SavedBy>
-    <ModificationStamp>2</ModificationStamp>
+    <ModificationStamp>3</ModificationStamp>
     <Date>2016-02-29</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.0.RT7_b1515-0427</PEversion>
@@ -22710,7 +22710,7 @@
               <ItemSymbol>_Pin</ItemSymbol>
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
-              <Value>PTB18/CAN0_TX/FTM2_CH0/I2S0_TX_BCLK/FB_AD15/FTM2_QD_PHA</Value>
+              <Value>CMP2_IN1/PTA13/LLWU_P4/CAN0_RX/FTM1_CH1/I2C2_SDA/I2S0_TX_FS/FTM1_QD_PHB</Value>
               <SharedPrphMode>false</SharedPrphMode>
             </ItemState>
             <ItemState>
@@ -22756,7 +22756,7 @@
                     <ItemSymbol>_Pin</ItemSymbol>
                     <ReadOnly>false</ReadOnly>
                     <UserReadOnly>false</UserReadOnly>
-                    <Value>PTB18/CAN0_TX/FTM2_CH0/I2S0_TX_BCLK/FB_AD15/FTM2_QD_PHA</Value>
+                    <Value>CMP2_IN1/PTA13/LLWU_P4/CAN0_RX/FTM1_CH1/I2C2_SDA/I2S0_TX_FS/FTM1_QD_PHB</Value>
                     <SharedPrphMode>false</SharedPrphMode>
                   </ItemState>
                   <ItemState>
