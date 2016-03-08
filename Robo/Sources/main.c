@@ -43,6 +43,8 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include "Event.h"
+
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
@@ -50,7 +52,6 @@ int main(void)
 /*lint -restore Enable MISRA rule (6.3) checking. */
 {
   /* Write your local variable definition here */
-	int array[2];
 
   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
   PE_low_level_init();
@@ -58,9 +59,10 @@ int main(void)
 
    /* Write your code here */
   for(;;) {
-	  LED1_Neg();
-	  WAIT1_Waitms(500);
-	  //array[5] = 10;
+	  EVNT_Init();
+
+
+	  EVNT_Deinit();
 
   }
 
