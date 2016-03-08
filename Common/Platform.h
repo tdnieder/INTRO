@@ -26,6 +26,9 @@
   #define PL_CONFIG_NOF_LED     (2) /* number of LEDs */
 #endif
 
+#define PL_CONFIG_HAS_EVENTS    (1) /* event driver */
+
+
 /* interfaces */
 void PL_Init(void); /* driver initialization */
 void PL_Deinit(void); /* driver deinitialization */
