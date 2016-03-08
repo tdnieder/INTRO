@@ -60,7 +60,7 @@ int main(void)
    /* Write your code here */
   for(;;) {
 	  EVNT_Init();
-
+	  // write stuff
 
 	  EVNT_Deinit();
 
