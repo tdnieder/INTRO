@@ -41,6 +41,7 @@
 #include "HF1.h"
 #include "WAIT1.h"
 #include "LED1.h"
+#include "Platform.h"
 
 #ifdef __cplusplus
 extern "C" {

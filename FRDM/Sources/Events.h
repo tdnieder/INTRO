@@ -42,6 +42,7 @@
 #include "LED3.h"
 #include "LEDpin1.h"
 #include "BitIoLdd1.h"
+#include "Platform.h"
 
 #ifdef __cplusplus
 extern "C" {
