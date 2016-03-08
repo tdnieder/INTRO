@@ -34,6 +34,7 @@
 #include "LED2.h"
 #include "LEDpin2.h"
 #include "BitIoLdd2.h"
+#include "HF1.h"
 #include "WAIT1.h"
 #include "LED1.h"
 #include "LEDpin1.h"
@@ -49,16 +50,20 @@ int main(void)
 /*lint -restore Enable MISRA rule (6.3) checking. */
 {
   /* Write your local variable definition here */
+	int array[2];
 
   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
   PE_low_level_init();
   /*** End of Processor Expert internal initialization.                    ***/
 
-  /* Write your code here */
-//  for(;;) {
-//  	LEDRED_Neg();
-//  	WAIT1_Waitms(500);
-//    }
+   /* Write your code here */
+  for(;;) {
+	  LED1_Neg();
+	  WAIT1_Waitms(500);
+	  //array[5] = 10;
+
+  }
+
 
   /* For example: for(;;) { } */
 
