@@ -17,7 +17,7 @@
   #include "LED2.h"
 #endif
 #if PL_CONFIG_NOF_LED>=3
-#include "LED3.h"
+  #include "LED3.h"
 #endif
 
 #if PL_CONFIG_NOF_LED>=1

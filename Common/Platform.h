@@ -27,6 +27,7 @@
 #endif
 
 #define PL_CONFIG_HAS_EVENTS    (1) /* event driver */
+#define PL_CONFIG_HAS_TIMER		(1) /* timer driver - frdm & robo have timers */
 
 
 /* interfaces */

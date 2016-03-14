@@ -34,7 +34,10 @@ extern "C" {
 #endif 
 
 
+
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#include "Platform.h"
+#include "Timer.h"
 
 /*
 ** ===================================================================
@@ -54,11 +57,30 @@ void Cpu_OnNMIINT(void)
   /* Write your code here ... */
 }
 
+
+/*
+** ===================================================================
+**     Event       :  TMR_OnInterrupt (module Events)
+**
+**     Component   :  Cpu [MKL25Z128LK4]
+*/
+/*!
+**     @brief
+**         This event is called by the timer if set time has passed by.
+*/
+/* ===================================================================*/
+
+void TI1_OnInterrupt(void)
+{
+	TMR_OnInterrupt();
+}
+
 /* END Events */
 
 #ifdef __cplusplus
 }  /* extern "C" */
 #endif 
+
 
 /*!
 ** @}
