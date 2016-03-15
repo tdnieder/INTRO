@@ -3,7 +3,7 @@
   <Header>
     <Name>Robo</Name>
     <SavedBy>Ueli</SavedBy>
-    <ModificationStamp>9</ModificationStamp>
+    <ModificationStamp>10</ModificationStamp>
     <Date>2016-02-29</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.0.RT7_b1515-0427</PEversion>
@@ -490,7 +490,7 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>100</Value>
+        <Value>120</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>MCG_PRDIV_CLKMode0</ItemSymbol>
@@ -9765,7 +9765,7 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>25</Value>
+        <Value>30</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>MCGOUTSelSpeedMode0</ItemSymbol>
@@ -9820,7 +9820,7 @@
       <ItemState>
         <ItemSymbol>MCGOutputSpeedMode0</ItemSymbol>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>100</Value>
+        <Value>120</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>IRCLKClkSpeedMode0</ItemSymbol>
@@ -9863,14 +9863,14 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>20.97152</Value>
+        <Value>120</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OUTDIV2PrescSpeedMode0</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>1</Value>
+        <Value>2</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OUTDIV2Presc_SpeedMode0</ItemSymbol>
@@ -9884,7 +9884,7 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>20.97152</Value>
+        <Value>60</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>FBClockCondGrp0</ItemSymbol>
@@ -9910,14 +9910,14 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>10.48576</Value>
+        <Value>60</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OUTDIV4PrescSpeedMode0</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>2</Value>
+        <Value>5</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>OUTDIV4Presc_SpeedMode0</ItemSymbol>
@@ -9931,7 +9931,7 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>10.48576</Value>
+        <Value>24</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>USB0_CLKINSpeedMode0</ItemSymbol>
@@ -9945,7 +9945,7 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Index>0</Index>
+        <Index>1</Index>
         <Expanded>true</Expanded>
       </ItemState>
       <ItemState>
@@ -9953,12 +9953,12 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>MCGFLLCLK</Value>
+        <Value>MCGPLLCLK</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>PLLFLLClockSpeedMode0</ItemSymbol>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>0</Value>
+        <Value>120</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>I2S0_CLKINCondGrp0</ItemSymbol>
