@@ -46,6 +46,7 @@
 #include "Event.h"
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#include "Application.h";
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -58,11 +59,13 @@ int main(void)
   /*** End of Processor Expert internal initialization.                    ***/
 
    /* Write your code here */
-  for(;;) {
-	  EVNT_Init();
+  APP_Start();
+
+  //for(;;) {
+//	  EVNT_Init();
 	  // write stuff
 
-	  EVNT_Deinit();
+//	  EVNT_Deinit();
 
   }
 

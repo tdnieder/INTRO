@@ -10,9 +10,7 @@
 #include "Event.h"
 #include "LED.h"
 #include "WAIT1.h"
-#include "CS1.h"
-#include "Keys.h"
-#include "CLS1.h"
+//#include "Keys.h"
 
 #if PL_CONFIG_HAS_EVENTS
 static void APP_EventHandler(EVNT_Handle event) {
