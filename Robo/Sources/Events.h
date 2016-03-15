@@ -40,6 +40,7 @@
 #include "BitIoLdd2.h"
 #include "HF1.h"
 #include "WAIT1.h"
+#include "CS1.h"
 #include "LED1.h"
 
 #ifdef __cplusplus
