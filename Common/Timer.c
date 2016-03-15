@@ -19,7 +19,8 @@ void TMR_OnInterrupt(void) {
   /* this one gets called from an interrupt!!!! */
   cntr++;
   if ((cntr%(BLINK_PERIOD_MS/TMR_TICK_MS))==0) { /* every two seconds */
-    EVNT_SetEvent(EVNT_LED_HEARTBEAT);
+	  EVNT_SetEvent(EVENT_LED_HEARTBEAT);
+//	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
   }
 }
 

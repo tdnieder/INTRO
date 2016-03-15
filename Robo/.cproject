@@ -46,7 +46,7 @@
 							</builder>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.223055611" name="Cross ARM GNU Assembler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.usepreprocessor.2044526970" name="Use preprocessor" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.usepreprocessor" value="true" valueType="boolean"/>
-								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths.136456904" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths" valueType="includePath">
+								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths.136456904" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Robo/Robo/Sources/Common}&quot;"/>
 									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Static_Code/PDD"/>
 									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Static_Code/IO_Map"/>
@@ -58,7 +58,7 @@
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.1537523516" name="Cross ARM C Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.1617830847" name="Language standard" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std" useByScannerDiscovery="true" value="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.c99" valueType="enumerated"/>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths.1037734452" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Robo/Robo/Sources/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="../../Common"/>
 									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Static_Code/PDD"/>
 									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Static_Code/IO_Map"/>
 									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Sources"/>

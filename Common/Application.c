@@ -20,12 +20,12 @@ static void APP_EventHandler(EVNT_Handle event) {
   case EVNT_STARTUP:
     LED1_On(); /* just do something */
     break;
-  case EVNT_LED_HEARTBEAT:
+  case EVENT_LED_HEARTBEAT:
     LED1_Neg();
     break;
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
-  case EVNT_SW1_PRESSED:
+  case EVENT_SW1_PRESSED:
     LED2_Neg();
     CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
     break;

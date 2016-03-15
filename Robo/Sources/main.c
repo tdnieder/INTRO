@@ -31,7 +31,6 @@
 #include "Cpu.h"
 #include "Events.h"
 #include "BitIoLdd1.h"
-#include "LED2.h"
 #include "LEDpin2.h"
 #include "BitIoLdd2.h"
 #include "HF1.h"
@@ -39,17 +38,24 @@
 #include "CS1.h"
 #include "SW1.h"
 #include "ExtIntLdd1.h"
-#include "LED1.h"
+#include "KSDK1.h"
+#include "TI1.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
+#include "BT1.h"
+#include "Serial1.h"
+#include "ASerialLdd1.h"
+#include "CLS1.h"
+#include "UTIL1.h"
 #include "LEDpin1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
-#include "Event.h"
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-#include "Application.h";
+#include "Application.h"
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -70,7 +76,7 @@ int main(void)
 
 //	  EVNT_Deinit();
 
-  }
+  //}
 
 
   /* For example: for(;;) { } */
@@ -82,7 +88,7 @@ int main(void)
   #endif
   /*** End of RTOS startup code.  ***/
   /*** Processor Expert end of main routine. DON'T MODIFY THIS CODE!!! ***/
-  for(;;){}
+  //for(;;){}
   /*** Processor Expert end of main routine. DON'T WRITE CODE BELOW!!! ***/
 } /*** End of main routine. DO NOT MODIFY THIS TEXT!!! ***/
 
