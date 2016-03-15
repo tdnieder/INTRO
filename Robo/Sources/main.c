@@ -37,6 +37,8 @@
 #include "HF1.h"
 #include "WAIT1.h"
 #include "CS1.h"
+#include "SW1.h"
+#include "ExtIntLdd1.h"
 #include "LED1.h"
 #include "LEDpin1.h"
 /* Including shared modules, which are used for whole project */

@@ -41,6 +41,8 @@
 #include "HF1.h"
 #include "WAIT1.h"
 #include "CS1.h"
+#include "SW1.h"
+#include "ExtIntLdd1.h"
 #include "LED1.h"
 
 #ifdef __cplusplus
@@ -62,6 +64,20 @@ extern "C" {
 /* ===================================================================*/
 void Cpu_OnNMIINT(void);
 
+
+void SW1_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  SW1_OnInterrupt (module Events)
+**
+**     Component   :  SW1 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
 
 /* END Events */
 
