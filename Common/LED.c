@@ -1,5 +1,5 @@
 #include "Platform.h"
-#if PL_CONFIG_HAS_LED
+#if PL_CONFIG_HAS_LEDS
 #include "LED.h"
 
 static void LED_Test(void) {

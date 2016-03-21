@@ -25,7 +25,7 @@ static void APP_EventHandler(EVNT_Handle event) {
     break;
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
-  case EVENT_SW1_PRESSED:
+  case EVNT_SW1_PRESSED:
     LED2_Neg();
     CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
     break;
@@ -77,6 +77,7 @@ void APP_Start(void) {
   EVNT_SetEvent(EVNT_STARTUP);
 #endif
   CLS1_SendStr("Hello World!\r\n", CLS1_GetStdio()->stdOut);
+
   for(;;) {
 #if PL_CONFIG_HAS_KEYS
     KEY_Scan();

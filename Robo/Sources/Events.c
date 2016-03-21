@@ -35,6 +35,9 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#include "Platform.h"
+#include "Event.h"
+#include "Timer.h"
 
 /*
 ** ===================================================================
@@ -87,7 +90,10 @@ void SW1_OnInterrupt(void)
 */
 void TI1_OnInterrupt(void)
 {
-  /* Write your code here ... */
+  /* Write your code here...*/
+#if PL_CONFIG_HAS_KEYS
+	EVNT_SetEvent(EVNT_SW1_PRESSED);
+#endif
 }
 
 /* END Events */

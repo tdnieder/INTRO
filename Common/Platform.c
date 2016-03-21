@@ -31,6 +31,15 @@ void PL_Init(void) {
 #if PL_CONFIG_HAS_KEYS
   KEY_Init();
 #endif
+#if PL_CONFIG_HAS_TRIGGER
+  TRG_Init();
+#endif
+#if PL_CONFIG_HAS_BUZZER
+  BUZ_Init();
+#endif
+#if PL_CONFIG_HAS_DEBOUNCE
+  KEYDBNC_Init();
+#endif
 }
 
 void PL_Deinit(void) {
