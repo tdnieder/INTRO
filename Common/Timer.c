@@ -10,18 +10,24 @@
 #if PL_CONFIG_HAS_TIMER
 #include "Timer.h"
 #include "Event.h"
+#include "Trigger.h"
+
+
 
 void TMR_OnInterrupt(void) {
+	TRG_AddTick();
+
   /* this one gets called from an interrupt!!!! */
   /*! \todo Add code for a blinking LED here */
-  static int cntr = 0;
-  #define BLINK_PERIOD_MS 2000
-  /* this one gets called from an interrupt!!!! */
-  cntr++;
-  if ((cntr%(BLINK_PERIOD_MS/TMR_TICK_MS))==0) { /* every two seconds */
-	  EVNT_SetEvent(EVENT_LED_HEARTBEAT);
+
+//	static int cntr = 0;
+//  #define BLINK_PERIOD_MS 2000
+//  /* this one gets called from an interrupt!!!! */
+//  /*cntr++;
+//  if ((cntr%(BLINK_PERIOD_MS/TMR_TICK_MS))==0) { /* every two seconds */
 //	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
-  }
+//  }
+
 }
 
 void TMR_Init(void) {
