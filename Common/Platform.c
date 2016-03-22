@@ -49,7 +49,7 @@ void PL_Init(void) {
   BUZ_Init();
 #endif
 #if PL_CONFIG_HAS_DEBOUNCE
-  KEYDBNC_Init();
+  //KEYDBNC_Init();
 #endif
 }
 

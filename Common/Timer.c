@@ -16,19 +16,13 @@
 
 void TMR_OnInterrupt(void) {
 	TRG_AddTick();
-//	EVNT_SetEvent(EVNT_LED_HEARTBEAT);
-  /* this one gets called from an interrupt!!!! */
-  /*! \todo Add code for a blinking LED here */
 
-//	static int cntr = 0;
-//  #define BLINK_PERIOD_MS 2000
-//  /* this one gets called from an interrupt!!!! */
-//  /*cntr++;
-//  if ((cntr%(BLINK_PERIOD_MS/TMR_TICK_MS))==0) { /* every two seconds */
-//	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
-//  }
+	/* this one gets called from an interrupt!!!! */
+
 
 }
+
+
 
 void TMR_Init(void) {
 }

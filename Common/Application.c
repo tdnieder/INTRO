@@ -79,16 +79,14 @@ static void APP_EventHandler(EVNT_Handle event) {
 void APP_Start(void) {
   PL_Init();
 
-  #if PL_CO
-  NFIG_HAS_EVENTS
+  #if PL_CONFIG_HAS_EVENTS
   EVNT_SetEvent(EVNT_STARTUP);
-#endif
-//  CLS1_SendStr("Hello World!\r\n", CLS1_GetStdio()->stdOut);
+  #endif
 
   for(;;) {
 
 #if PL_CONFIG_HAS_KEYS
-//    KEY_Scan();
+    KEY_Scan();
 #endif
 #if PL_CONFIG_HAS_EVENTS
     EVNT_HandleEvent(APP_EventHandler, TRUE);

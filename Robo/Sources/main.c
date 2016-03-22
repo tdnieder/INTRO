@@ -72,15 +72,6 @@ int main(void)
    /* Write your code here */
   APP_Start();
 
-  //for(;;) {
-//	  EVNT_Init();
-	  // write stuff
-
-//	  EVNT_Deinit();
-
-  //}
-
-
   /* For example: for(;;) { } */
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/

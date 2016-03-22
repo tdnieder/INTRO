@@ -62,7 +62,7 @@ static bool CheckCallbacks(void) {
 
 void TRG_AddTick(void) {
   TRG_TriggerKind i;
-  CS1_CriticalVariable()
+  CS1_CriticalVariable();
 
   CS1_EnterCritical();
   for(i=(TRG_TriggerKind)0;i<TRG_NOF_TRIGGERS;i++) {
