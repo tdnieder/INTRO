@@ -16,7 +16,7 @@
 
 void TMR_OnInterrupt(void) {
 	TRG_AddTick();
-
+//	EVNT_SetEvent(EVNT_LED_HEARTBEAT);
   /* this one gets called from an interrupt!!!! */
   /*! \todo Add code for a blinking LED here */
 

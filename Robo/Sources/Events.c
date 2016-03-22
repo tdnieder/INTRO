@@ -71,7 +71,11 @@ void Cpu_OnNMIINT(void)
 */
 void SW1_OnInterrupt(void)
 {
-  /* Write your code here ... */
+
+	#if PL_CONFIG_HAS_KEYS
+		EVNT_SetEvent(EVNT_SW1_PRESSED);
+	#endif
+
 }
 
 /*
@@ -91,9 +95,9 @@ void SW1_OnInterrupt(void)
 void TI1_OnInterrupt(void)
 {
   /* Write your code here...*/
-#if PL_CONFIG_HAS_KEYS
-	EVNT_SetEvent(EVNT_SW1_PRESSED);
-#endif
+TMR_OnInterrupt();
+
+
 }
 
 /* END Events */

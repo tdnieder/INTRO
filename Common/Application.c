@@ -29,6 +29,9 @@ static void APP_EventHandler(EVNT_Handle event) {
   case EVNT_SW1_PRESSED:
     LED2_Neg();
     CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
+	#if PL_CONFIG_HAS_BUZZER
+	  BUZ_PlayTune();
+	#endif
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=2
@@ -75,19 +78,17 @@ static void APP_EventHandler(EVNT_Handle event) {
 
 void APP_Start(void) {
   PL_Init();
-#if PL_CONFIG_HAS_EVENTS
+
+  #if PL_CO
+  NFIG_HAS_EVENTS
   EVNT_SetEvent(EVNT_STARTUP);
 #endif
-  CLS1_SendStr("Hello World!\r\n", CLS1_GetStdio()->stdOut);
+//  CLS1_SendStr("Hello World!\r\n", CLS1_GetStdio()->stdOut);
 
   for(;;) {
-#if PL_CONFIG_HAS_BUZZER
-	  BUZ_Init();
-	  BUZ_PlayTune();
-	  #endif
 
 #if PL_CONFIG_HAS_KEYS
-    KEY_Scan();
+//    KEY_Scan();
 #endif
 #if PL_CONFIG_HAS_EVENTS
     EVNT_HandleEvent(APP_EventHandler, TRUE);
