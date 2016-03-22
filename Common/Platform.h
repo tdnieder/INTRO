@@ -32,7 +32,7 @@
   #error "One board type has to be defined in Platform_Local.h!"
 #endif
 
-#define PL_CONFIG_TEST_DRIVERS  (1) /* if enabled, will perform driver tests */
+#define PL_CONFIG_TEST_DRIVERS  (0) /* if enabled, will perform driver tests */
 
 /* configuration from local config */
 #define PL_CONFIG_NOF_LEDS      PL_LOCAL_CONFIG_NOF_LEDS /* number of LEDs */

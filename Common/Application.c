@@ -13,6 +13,7 @@
 #include "CS1.h"
 #include "Keys.h"
 #include "CLS1.h"
+#include "Buzzer.h"
 
 #if PL_CONFIG_HAS_EVENTS
 static void APP_EventHandler(EVNT_Handle event) {
@@ -20,7 +21,7 @@ static void APP_EventHandler(EVNT_Handle event) {
   case EVNT_STARTUP:
     LED1_On(); /* just do something */
     break;
-  case EVENT_LED_HEARTBEAT:
+  case EVNT_LED_HEARTBEAT:
     LED1_Neg();
     break;
 #if PL_CONFIG_HAS_KEYS
@@ -71,6 +72,7 @@ static void APP_EventHandler(EVNT_Handle event) {
 }
 #endif /* PL_CONFIG_HAS_EVENTS */
 
+
 void APP_Start(void) {
   PL_Init();
 #if PL_CONFIG_HAS_EVENTS
@@ -79,6 +81,11 @@ void APP_Start(void) {
   CLS1_SendStr("Hello World!\r\n", CLS1_GetStdio()->stdOut);
 
   for(;;) {
+#if PL_CONFIG_HAS_BUZZER
+	  BUZ_Init();
+	  BUZ_PlayTune();
+	  #endif
+
 #if PL_CONFIG_HAS_KEYS
     KEY_Scan();
 #endif
