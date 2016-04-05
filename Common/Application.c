@@ -9,11 +9,19 @@
 #include "Application.h"
 #include "Event.h"
 #include "LED.h"
-#include "WAIT1.h"
 #include "CS1.h"
-#include "Keys.h"
+#include "WAIT1.h"
 #include "CLS1.h"
+#include "Keys.h"
+
+#if PL_CONFIG_HAS_RTOS
+#include "RTOS.h"
+static void
+#endif
+
+#if PL_CONFIG_HAS_BUZZER
 #include "Buzzer.h"
+#endif
 
 #if PL_CONFIG_HAS_EVENTS
 static void APP_EventHandler(EVNT_Handle event) {
@@ -78,6 +86,7 @@ static void APP_EventHandler(EVNT_Handle event) {
 
 void APP_Start(void) {
   PL_Init();
+
 
   #if PL_CONFIG_HAS_EVENTS
   EVNT_SetEvent(EVNT_STARTUP);

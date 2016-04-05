@@ -48,6 +48,7 @@
 
 
 /* driver configuration */
+#define PL_CONFIG_HAS_RTOS		(1)
 #define PL_CONFIG_HAS_LEDS      (1 && !defined(PL_LOCAL_CONFIG_HAS_LEDS_DISABLED)) /* LED driver */
 #define PL_CONFIG_HAS_EVENTS    (1) /* event driver */
 #define PL_CONFIG_HAS_TIMER     (1) /* timer interrupts */
