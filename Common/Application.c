@@ -16,7 +16,6 @@
 
 #if PL_CONFIG_HAS_RTOS
 #include "RTOS.h"
-static void
 #endif
 
 #if PL_CONFIG_HAS_BUZZER
@@ -87,6 +86,10 @@ static void APP_EventHandler(EVNT_Handle event) {
 void APP_Start(void) {
   PL_Init();
 
+  #if PL_CONFIG_HAS_RTOS
+
+  RTOS_Run();
+  #endif
 
   #if PL_CONFIG_HAS_EVENTS
   EVNT_SetEvent(EVNT_STARTUP);

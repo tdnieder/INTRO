@@ -22,12 +22,16 @@ static void AppTask(void* param) {
   }
 }
 
+
 void RTOS_Run(void) {
   FRTOS1_vTaskStartScheduler();  /* does usually not return! */
 }
 
 void RTOS_Init(void) {
   /*! \todo Create tasks here */
+	if(FRTOS1_xTaskCreate(AppTask, (signed portCHAR *)"Blinky", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS){
+		for(;;){}
+	  }
 }
 
 void RTOS_Deinit(void) {

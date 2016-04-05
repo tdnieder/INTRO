@@ -47,11 +47,7 @@
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.223055611" name="Cross ARM GNU Assembler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.usepreprocessor.2044526970" name="Use preprocessor" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.usepreprocessor" value="true" valueType="boolean"/>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths.136456904" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Robo/Robo/Sources/Common}&quot;"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Static_Code/PDD"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Static_Code/IO_Map"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Sources"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Generated_Code"/>
+									<listOptionValue builtIn="false" value="../../Common"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input.413143152" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input"/>
 							</tool>
@@ -59,10 +55,6 @@
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.1617830847" name="Language standard" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std" useByScannerDiscovery="true" value="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.c99" valueType="enumerated"/>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths.1037734452" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../Common"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Static_Code/PDD"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Static_Code/IO_Map"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Sources"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Generated_Code"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Sources&quot;"/>
@@ -72,11 +64,6 @@
 							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.607767161" name="Cross ARM C++ Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler">
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths.2062026834" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Robo/Robo/Sources/Common}&quot;"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Static_Code/PDD"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Static_Code/IO_Map"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Sources"/>
-									<listOptionValue builtIn="false" value="C:/Users/Ueli/Documents/Intro16/INTRO/Robo/Generated_Code"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Sources&quot;"/>

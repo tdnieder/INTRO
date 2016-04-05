@@ -27,6 +27,9 @@
 #if PL_CONFIG_HAS_BUZZER
   #include "Buzzer.h"
 #endif
+#if PL_CONFIG_HAS_RTOS
+  #include "RTOS.h"
+#endif
 
 
 void PL_Init(void) {
@@ -50,6 +53,9 @@ void PL_Init(void) {
 #endif
 #if PL_CONFIG_HAS_DEBOUNCE
   //KEYDBNC_Init();
+#endif
+#if PL_CONFIG_HAS_RTOS
+  RTOS_Init();
 #endif
 }
 
@@ -75,5 +81,7 @@ void PL_Deinit(void) {
 #if PL_CONFIG_HAS_LEDS
   LED_Deinit();
 #endif
-
+#if PL_CONFIG_HAS_RTOS
+  RTOS_Init();
+#endif
 }
