@@ -26,6 +26,10 @@
 static void vSlaveTask(void *pvParameters) {
   for(;;) {
     /*! \todo Implement functionality */
+	xSemaphoreHandle sem = pvParameters;
+	(void) xSemaphoreTake(sem, portMAX_DELAY);
+	if (sem==NULL)
+	for(;;){}  /* error */
   }
 }
 
