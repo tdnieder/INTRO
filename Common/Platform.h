@@ -61,7 +61,7 @@
 #define PL_CONFIG_HAS_SEGGER_RTT        (0 && PL_CONFIG_HAS_SHELL) /* using RTT with shell */
 #define PL_CONFIG_HAS_SHELL_QUEUE       (0 && PL_CONFIG_HAS_SHELL) /* enable shell queueing */
 #define PL_CONFIG_SQUEUE_SINGLE_CHAR    (0 && PL_CONFIG_HAS_SHELL_QUEUE) /* using single character shell queue */
-#define PL_CONFIG_HAS_SEMAPHORE         (0) /* semaphore tests */
+#define PL_CONFIG_HAS_SEMAPHORE         (1) /* semaphore tests */
 #define PL_CONFIG_HAS_REFLECTANCE       (0 && PL_CONFIG_BOARD_IS_ROBO)
 
 #define PL_CONFIG_HAS_BLUETOOTH         (0)
