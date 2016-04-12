@@ -24,14 +24,19 @@
 
 #if USE_SEMAPHORES
 static void vSlaveTask(void *pvParameters) {
-  for(;;) {
-    /*! \todo Implement functionality */
-	xSemaphoreHandle sem = pvParameters;
-	(void) xSemaphoreTake(sem, portMAX_DELAY);
-	if (sem==NULL)
-	for(;;){}  /* error */
-  }
-}
+
+	xSemaphoreHandle sem = (xSemaphoreHandle)pvParameters;
+
+	if (sem==NULL) {
+		for(;;) {/*should not be null*/ }
+	}
+
+	for(;;){
+		if (xSemaphoreTake(sem, portMAX_DELAY)==pdPASS){
+		LED3_Neg();
+		}
+     }
+   }
 
 static void vMasterTask(void *pvParameters) {
   /*! \todo Understand functionality */
@@ -48,12 +53,10 @@ static void vMasterTask(void *pvParameters) {
     for(;;){} /* error */
   }
   for(;;) {
-    if (sem != NULL) { /* valid semaphore? */
       (void)xSemaphoreGive(sem); /* give control to other task */
       vTaskDelay(1000/portTICK_PERIOD_MS);
     }
   }
-}
 #endif /* USE_SEMAPHORES */
 
 void SEM_Deinit(void) {
