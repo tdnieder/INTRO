@@ -30,6 +30,9 @@
 #if PL_CONFIG_HAS_RTOS
   #include "RTOS.h"
 #endif
+#if PL_CONFIG_HAS_SHELL
+#include "Shell.h"
+#endif
 
 
 void PL_Init(void) {
@@ -57,6 +60,9 @@ void PL_Init(void) {
 #if PL_CONFIG_HAS_RTOS
   RTOS_Init();
 #endif
+#if PL_CONFIG_HAS_SHELL
+  SHELL_Init();
+#endif
 }
 
 void PL_Deinit(void) {
@@ -83,5 +89,8 @@ void PL_Deinit(void) {
 #endif
 #if PL_CONFIG_HAS_RTOS
   RTOS_Init();
+#endif
+#if PL_CONFIG_HAS_SHELL
+  SHELL_Deinit();
 #endif
 }
