@@ -43,9 +43,6 @@
 #include "TI1.h"
 #include "TimerIntLdd1.h"
 #include "TU1.h"
-#include "BT1.h"
-#include "Serial1.h"
-#include "ASerialLdd1.h"
 #include "CLS1.h"
 #include "UTIL1.h"
 #include "BUZ1.h"
@@ -69,6 +66,8 @@
 #include "BitIoLdd9.h"
 #include "IR6.h"
 #include "BitIoLdd10.h"
+#include "AS1.h"
+#include "ASerialLdd3.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
