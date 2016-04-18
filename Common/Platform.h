@@ -64,7 +64,7 @@
 #define PL_CONFIG_HAS_SEMAPHORE         (1) /* semaphore tests */
 #define PL_CONFIG_HAS_REFLECTANCE       (1 && PL_CONFIG_BOARD_IS_ROBO)
 
-#define PL_CONFIG_HAS_BLUETOOTH         (0)
+#define PL_CONFIG_HAS_BLUETOOTH         (1)
 #define PL_CONFIG_HAS_USB_CDC			(0)
 #define PL_CONFIG_HAS_MOTOR             (0)
 #define PL_CONFIG_HAS_MCP4728           (0)
