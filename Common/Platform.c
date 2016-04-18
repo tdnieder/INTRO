@@ -68,7 +68,7 @@ void PL_Init(void) {
   SHELL_Init();
 #endif
 #if PL_CONFIG_HAS_REFLECTANCE
-  Reflectanc_Init();
+  REF_Init();
 #endif
 }
 
