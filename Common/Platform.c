@@ -36,7 +36,9 @@
 #if PL_CONFIG_HAS_REFLECTANCE
   #include "Reflectance.h"
 #endif
-
+#if PL_CONFIG_HAS_MOTOR
+  #include "Motor.h"
+#endif
 
 
 void PL_Init(void) {
@@ -70,6 +72,10 @@ void PL_Init(void) {
 #if PL_CONFIG_HAS_REFLECTANCE
   REF_Init();
 #endif
+#if PL_CONFIG_HAS_MOTOR
+  MOT_Init();
+#endif
+
 }
 
 void PL_Deinit(void) {
@@ -101,6 +107,9 @@ void PL_Deinit(void) {
   SHELL_Deinit();
 #endif
 #if PL_CONFIG_HAS_REFLECTANCE
-  Reflectanc_Deinit();
+REF_Deinit();
+  #endif
+#if PL_CONFIG_HAS_MOTOR
+  MOT_Deinit();
 #endif
 }

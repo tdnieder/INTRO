@@ -43,9 +43,6 @@
 #include "SW1.h"
 #include "ExtIntLdd1.h"
 #include "KSDK1.h"
-#include "TI1.h"
-#include "TimerIntLdd1.h"
-#include "TU1.h"
 #include "BT1.h"
 #include "Serial1.h"
 #include "ASerialLdd1.h"
@@ -72,6 +69,15 @@
 #include "BitIoLdd9.h"
 #include "IR6.h"
 #include "BitIoLdd10.h"
+#include "DIRL.h"
+#include "BitIoLdd11.h"
+#include "DIRR.h"
+#include "BitIoLdd12.h"
+#include "MOTTU.h"
+#include "PWMR.h"
+#include "PwmLdd1.h"
+#include "PWML.h"
+#include "PwmLdd2.h"
 
 #ifdef __cplusplus
 extern "C" {

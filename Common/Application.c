@@ -81,7 +81,6 @@ void APP_Start(void) {
   PL_Init();
 
   #if PL_CONFIG_HAS_RTOS
-
   RTOS_Run();
   #endif
 

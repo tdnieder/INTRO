@@ -21,9 +21,9 @@
 #if PL_CONFIG_HAS_SHELL_QUEUE
   #include "ShellQueue.h"
 #endif
-//#if PL_CONFIG_HAS_REFLECTANCE
-//  #include "Reflectance.h"
-//#endif
+#if PL_CONFIG_HAS_REFLECTANCE
+  #include "Reflectance.h"
+#endif
 #if PL_CONFIG_HAS_SEGGER_RTT
   #include "RTT1.h"
 #endif
