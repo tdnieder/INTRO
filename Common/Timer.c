@@ -11,11 +11,12 @@
 #include "Timer.h"
 #include "Event.h"
 #include "Trigger.h"
-
+#include "Tacho.h"
 
 
 void TMR_OnInterrupt(void) {
 	TRG_AddTick();
+	TACHO_Sample();
 
 	/* this one gets called from an interrupt!!!! */
 

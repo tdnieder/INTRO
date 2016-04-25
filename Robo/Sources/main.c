@@ -85,6 +85,9 @@
 #include "BitIoLdd13.h"
 #include "C21.h"
 #include "BitIoLdd14.h"
+#include "QuadInt.h"
+#include "TimerIntLdd2.h"
+#include "TU_QuadInt.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
