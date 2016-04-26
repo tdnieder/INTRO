@@ -153,20 +153,24 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
   }
   (void)RefCnt_ResetCounter(timerHandle); /* reset timer counter */
   do {
-    cnt = 0;
+	EnterCritical();
     timerVal = RefCnt_GetCounterValue(timerHandle);
     if (timerVal>0x5000) { /*! \todo You might need to adjust this! */
+      ExitCritical();
       break; /* timeout */
+
     }
+    cnt = 0;
     for(i=0;i<REF_NOF_SENSORS;i++) {
       if (raw[i]==MAX_SENSOR_VALUE) { /* not measured yet? */
         if (SensorFctArray[i].GetVal()==0) {
           raw[i] = timerVal;
         }
-      } else { /* have value */
+        } else { /* have value */
         cnt++;
       }
     }
+    ExitCritical();
   } while(cnt!=REF_NOF_SENSORS);
   LED_IR_Off(); /* IR LED's off */
 }
@@ -188,6 +192,7 @@ static void REF_CalibrateMinMax(SensorTimeType min[REF_NOF_SENSORS], SensorTimeT
 static void ReadCalibrated(SensorTimeType calib[REF_NOF_SENSORS], SensorTimeType raw[REF_NOF_SENSORS]) {
   int i;
   int32_t x, denominator;
+
   REF_MeasureRaw(raw);
   for(i=0;i<REF_NOF_SENSORS;i++) {
     x = 0;

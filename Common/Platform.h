@@ -64,8 +64,8 @@
 #define PL_CONFIG_HAS_SEMAPHORE         (1) /* semaphore tests */
 #define PL_CONFIG_HAS_REFLECTANCE       (1 && PL_CONFIG_BOARD_IS_ROBO)
 
-#define PL_CONFIG_HAS_BLUETOOTH         (0)
-#define PL_CONFIG_HAS_USB_CDC			(1)
+#define PL_CONFIG_HAS_BLUETOOTH         (1)
+#define PL_CONFIG_HAS_USB_CDC			(0)
 #define PL_CONFIG_HAS_MOTOR             (1)
 #define PL_CONFIG_HAS_MCP4728           (0)
 #define PL_CONFIG_HAS_QUADRATURE        (1)
@@ -74,7 +74,7 @@
 #define PL_CONFIG_HAS_PID               (1)
 #define PL_CONFIG_HAS_DRIVE             (1)
 #define PL_CONFIG_HAS_TURN              (0)
-#define PL_CONFIG_HAS_LINE_FOLLOW       (0)
+#define PL_CONFIG_HAS_LINE_FOLLOW       (1)
 #define PL_CONFIG_HAS_RADIO             (0)
 #define RNET_CONFIG_REMOTE_STDIO        (0) /* temporary only, to be remove when RNET gets added */
 #define PL_CONFIG_HAS_REMOTE            (0)

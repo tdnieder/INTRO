@@ -45,6 +45,13 @@
 #if PL_CONFIG_HAS_DRIVE
 	#include "Drive.h"
 #endif
+#if PL_CONFIG_HAS_LINE_FOLLOW
+	#include "LineFollow.h"
+#endif
+#if PL_CONFIG_HAS_PID
+	#include "Pid.h"
+#endif
+
 
 void PL_Init(void) {
 #if PL_CONFIG_HAS_LEDS
@@ -86,6 +93,12 @@ void PL_Init(void) {
 #if PL_CONFIG_HAS_DRIVE
 	DRV_Init();
 #endif
+#if PL_CONFIG_HAS_LINE_FOLLOW
+	LF_Init();
+#endif
+#if PL_CONFIG_HAS_PID
+	PID_Init();
+#endif
 }
 void PL_Deinit(void) {
 #if PL_CONFIG_HAS_TRIGGER
@@ -126,5 +139,11 @@ REF_Deinit();
 #endif
 #if PL_CONFIG_HAS_DRIVE
   DRV_Deinit();
+#endif
+#if PL_CONFIG_HAS_LINE_FOLLOW
+	LF_Deinit();
+#endif
+#if PL_CONFIG_HAS_PID
+	PID_Deinit();
 #endif
 }
