@@ -51,6 +51,9 @@
 #if PL_CONFIG_HAS_PID
 	#include "Pid.h"
 #endif
+#if PL_CONFIG_HAS_RADIO
+	#include "Radio.h"
+#endif
 
 
 void PL_Init(void) {
@@ -99,7 +102,12 @@ void PL_Init(void) {
 #if PL_CONFIG_HAS_PID
 	PID_Init();
 #endif
+#if PL_CONFIG_HAS_RADIO
+	RADIO_Init();
+#endif
 }
+
+
 void PL_Deinit(void) {
 #if PL_CONFIG_HAS_TRIGGER
   TRG_Deinit();
@@ -145,5 +153,8 @@ REF_Deinit();
 #endif
 #if PL_CONFIG_HAS_PID
 	PID_Deinit();
+#endif
+#if PL_CONFIG_HAS_RADIO
+	RADIO_Deinit();
 #endif
 }

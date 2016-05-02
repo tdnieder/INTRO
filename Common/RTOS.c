@@ -13,7 +13,9 @@
 #include "Keys.h"
 #include "Application.h"
 
-
+/**
+ * App-Task contains LED Heartbeat
+ */
 static void AppTask(void* param) {
   (void)param; /* avoid compiler warning */
   EVNT_SetEvent(EVNT_STARTUP); /* set startup event */
@@ -24,7 +26,6 @@ static void AppTask(void* param) {
 }
 
 
-
 void RTOS_Run(void) {
   FRTOS1_vTaskStartScheduler();  /* does usually not return! */
 }
@@ -33,7 +34,11 @@ void RTOS_Init(void) {
   /*! \todo Create tasks here */
 	if(FRTOS1_xTaskCreate(AppTask, (signed portCHAR *)"Blinky", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS){
 		for(;;){}
-	  }
+	}
+	/* not necessary, already implemented in RADIO_Init()!!!!!
+	if(FRTOS1_xTaskCreate(RadioTask, (signed portCHAR *)"Radio", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS){
+		for(;;){}
+	}*/
 
 //	// Task 2, Test motor
 //	if(FRTOS1_xTaskCreate(MotorTask, (signed portCHAR *)"Test Moto", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS){
