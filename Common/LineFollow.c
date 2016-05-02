@@ -116,8 +116,6 @@ static void StateMachine(void) {
       break;
     case STATE_STOP:
       SHELL_SendString("Stopped!\r\n");
-      DRV_SetMode(DRV_MODE_STOP);
-
 #if PL_CONFIG_HAS_TURN
       TURN_Turn(TURN_STOP, NULL);
 #endif
@@ -135,7 +133,6 @@ static void LineTask (void *pvParameters) {
 
   (void)pvParameters; /* not used */
   for(;;) {
-
     (void)xTaskNotifyWait(0UL, LF_START_FOLLOWING|LF_STOP_FOLLOWING, &notifcationValue, 0); /* check flags */
     if (notifcationValue&LF_START_FOLLOWING) {
       DRV_SetMode(DRV_MODE_NONE); /* disable any drive mode */

@@ -35,7 +35,6 @@
 #define PL_CONFIG_TEST_DRIVERS  (0) /* if enabled, will perform driver tests */
 
 /* configuration from local config */
-
 #define PL_CONFIG_NOF_LEDS      PL_LOCAL_CONFIG_NOF_LEDS /* number of LEDs */
 #define PL_CONFIG_NOF_KEYS      PL_LOCAL_CONFIG_NOF_KEYS /* number of keys */
 #define PL_CONFIG_KEY_1_ISR     PL_LOCAL_CONFIG_KEY_1_ISR /* if key is using interrupt */
@@ -58,27 +57,28 @@
 #define PL_CONFIG_HAS_RTOS      (1) /* RTOS support */
 
 #define PL_CONFIG_HAS_SHELL             (1) /* shell support disabled for now */
+#define PL_CONFIG_HAS_BLUETOOTH         (0 && PL_CONFIG_BOARD_IS_ROBO)
 #define PL_CONFIG_HAS_SEGGER_RTT        (0 && PL_CONFIG_HAS_SHELL) /* using RTT with shell */
-#define PL_CONFIG_HAS_SHELL_QUEUE       (0 && PL_CONFIG_HAS_SHELL) /* enable shell queueing */
-#define PL_CONFIG_SQUEUE_SINGLE_CHAR    (0 && PL_CONFIG_HAS_SHELL_QUEUE) /* using single character shell queue */
+#define PL_CONFIG_HAS_SHELL_QUEUE       (1 && PL_CONFIG_HAS_SHELL) /* enable shell queueing */
+#define PL_CONFIG_SQUEUE_SINGLE_CHAR    (1 && PL_CONFIG_HAS_SHELL_QUEUE) /* using single character shell queue */
 #define PL_CONFIG_HAS_SEMAPHORE         (1) /* semaphore tests */
 #define PL_CONFIG_HAS_REFLECTANCE       (1 && PL_CONFIG_BOARD_IS_ROBO)
+#define PL_CONFIG_HAS_MOTOR             (1 && PL_CONFIG_BOARD_IS_ROBO)
+#define PL_CONFIG_HAS_QUADRATURE        (1 && PL_CONFIG_HAS_MOTOR)
+#define PL_CONFIG_HAS_MOTOR_TACHO       (1 && PL_CONFIG_HAS_QUADRATURE)
 
-#define PL_CONFIG_HAS_BLUETOOTH         (1)
-#define PL_CONFIG_HAS_USB_CDC			(0)
-#define PL_CONFIG_HAS_MOTOR             (1)
-#define PL_CONFIG_HAS_MCP4728           (0)
-#define PL_CONFIG_HAS_QUADRATURE        (1)
-#define PL_CONFIG_HAS_QUAD_CALIBRATION  (0)
-#define PL_CONFIG_HAS_MOTOR_TACHO       (1)
-#define PL_CONFIG_HAS_PID               (1)
-#define PL_CONFIG_HAS_DRIVE             (1)
-#define PL_CONFIG_HAS_TURN              (0)
-#define PL_CONFIG_HAS_LINE_FOLLOW       (1)
-#define PL_CONFIG_HAS_RADIO             (0)
-#define RNET_CONFIG_REMOTE_STDIO        (0) /* temporary only, to be remove when RNET gets added */
+#define PL_CONFIG_HAS_MCP4728           (0 && PL_CONFIG_BOARD_IS_ROBO_V1) /* only for V1 robot */
+#define PL_CONFIG_HAS_QUAD_CALIBRATION  (0 && PL_CONFIG_HAS_MCP4728)
+#define PL_CONFIG_HAS_PID               (1 && PL_CONFIG_HAS_QUADRATURE)
+#define PL_CONFIG_HAS_DRIVE             (1 && PL_CONFIG_HAS_PID)
+#define PL_CONFIG_HAS_LINE_FOLLOW       (1 && PL_CONFIG_HAS_DRIVE)
+#define PL_CONFIG_HAS_RADIO             (1)
+//#define RNET_CONFIG_REMOTE_STDIO        (0) /* temporary only, to be remove when RNET gets added */
 #define PL_CONFIG_HAS_REMOTE            (0)
+#define PL_CONFIG_CONTROL_SENDER        (1 && PL_CONFIG_BOARD_IS_FRDM)
+#define PL_CONFIG_HAS_JOYSTICK          (1 && PL_CONFIG_BOARD_IS_FRDM)
 #define PL_CONFIG_HAS_LINE_MAZE         (0)
+#define PL_CONFIG_HAS_TURN              (0)
 
 
 /* interface */

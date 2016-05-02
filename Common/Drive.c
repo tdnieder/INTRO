@@ -6,16 +6,14 @@
  * This module allows to drive the robot and to perform turns.
  */
 #include "Platform.h"
-#if PL_CONFIG_HAS_DRIVE
+#if PL_CONFIG_BOARD_HAS_DRIVE
 #include "Drive.h"
 #include "FRTOS1.h"
 #include "UTIL1.h"
 #include "Tacho.h"
 #include "Pid.h"
 #include "Motor.h"
-#if PL_CONFIG_HAS_SHELL
-  #include "CLS1.h"
-#endif
+#include "CLS1.h"
 #include "Q4CLeft.h"
 #include "Q4CRight.h"
 #include "Shell.h"
