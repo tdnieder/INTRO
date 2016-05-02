@@ -59,9 +59,9 @@
   #include "LineFollow.h"
 #endif
 #if PL_CONFIG_HAS_RADIO
-  #include "RApp.h"
+  //#include "RApp.h"
   #include "RNet_App.h"
-  #include "RNetConf.h"
+  #include "RNet_AppConfig.h"
 #endif
 #if RNET_CONFIG_REMOTE_STDIO
   #include "RStdIO.h"

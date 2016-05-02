@@ -51,6 +51,9 @@
 #if PL_CONFIG_HAS_PID
 	#include "Pid.h"
 #endif
+#if PL_CONFIG_HAS_RADIO
+	#include "RNet_App.h"
+#endif
 
 
 void PL_Init(void) {
@@ -98,6 +101,33 @@ void PL_Init(void) {
 #endif
 #if PL_CONFIG_HAS_PID
 	PID_Init();
+#if PL_CONFIG_HAS_RTOS
+  RTOS_Init();
+#endif
+#if PL_CONFIG_HAS_SHELL
+  SHELL_Deinit();
+#endif
+#if PL_CONFIG_HAS_REFLECTANCE
+REF_Deinit();
+  #endif
+#if PL_CONFIG_HAS_MOTOR
+  MOT_Deinit();
+#endif
+#if PL_CONFIG_HAS_MOTOR_TACHO
+  TACHO_Deinit();
+#endif
+#if PL_CONFIG_HAS_DRIVE
+  DRV_Deinit();
+#endif
+#if PL_CONFIG_HAS_LINE_FOLLOW
+	LF_Deinit();
+#endif
+#if PL_CONFIG_HAS_PID
+	PID_Deinit();
+#endif
+#if PL_CONFIG_HAS_RADIO
+	RNETA_Init();
+#endif
 #endif
 }
 void PL_Deinit(void) {
@@ -145,5 +175,8 @@ REF_Deinit();
 #endif
 #if PL_CONFIG_HAS_PID
 	PID_Deinit();
+#endif
+#if PL_CONFIG_HAS_RADIO
+	RNETA_Deinit();
 #endif
 }
