@@ -19,6 +19,10 @@
 #if PL_CONFIG_BOARD_IS_ROBO_V2
   #include "PORT_PDD.h"
 #endif
+#include "FreeRTOSConfig.h"
+#if configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
+  #include "SYS1.h"
+#endif
 
 void KEY_Scan(void) {
   /*! \todo check handling all keys */
@@ -108,6 +112,9 @@ void KEY_DisableInterrupts(void) {
 }
 
 void KEY_OnInterrupt(KEY_Buttons button) {
+#if configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
+  SYS1_RecordEnterISR();
+#endif
 #if PL_CONFIG_HAS_DEBOUNCE
   KEYDBNC_Process(); /* debounce key(s) */
 #else
@@ -151,6 +158,9 @@ void KEY_OnInterrupt(KEY_Buttons button) {
     default:
       break;
   }
+#endif
+#if configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
+  SYS1_RecordExitISR();
 #endif
 }
 

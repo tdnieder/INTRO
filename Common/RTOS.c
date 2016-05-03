@@ -9,14 +9,13 @@
 #include "RTOS.h"
 #include "FRTOS1.h"
 #include "LED.h"
-#include "Motor.h"
 #include "Event.h"
 #include "Keys.h"
 #include "Application.h"
 
-  MOT_MotorDevice* mLeft;
-  MOT_MotorDevice* mRight;
-
+/**
+ * App-Task contains LED Heartbeat
+ */
 static void AppTask(void* param) {
   (void)param; /* avoid compiler warning */
   EVNT_SetEvent(EVNT_STARTUP); /* set startup event */
@@ -25,20 +24,6 @@ static void AppTask(void* param) {
     FRTOS1_vTaskDelay(500/portTICK_PERIOD_MS);
   }
 }
-
-//static void MotorTask(void* param) {
-//  (void)param; /* avoid compiler warning */
-//  EVNT_SetEvent(EVNT_STARTUP); /* set startup event */
-//  mLeft = MOT_GetMotorHandle(MOT_MOTOR_LEFT);
-//  mRight = MOT_GetMotorHandle(MOT_MOTOR_RIGHT);
-//
-//
-//  MOT_SetSpeedPercent(mLeft, 15);
-//  MOT_SetSpeedPercent(mRight,-15);
-//
-//  for(;;) { }
-//}
-
 
 
 void RTOS_Run(void) {
@@ -49,7 +34,11 @@ void RTOS_Init(void) {
   /*! \todo Create tasks here */
 	if(FRTOS1_xTaskCreate(AppTask, (signed portCHAR *)"Blinky", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS){
 		for(;;){}
-	  }
+	}
+	/* not necessary, already implemented in RADIO_Init()!!!!!
+	if(FRTOS1_xTaskCreate(RadioTask, (signed portCHAR *)"Radio", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS){
+		for(;;){}
+	}*/
 
 //	// Task 2, Test motor
 //	if(FRTOS1_xTaskCreate(MotorTask, (signed portCHAR *)"Test Moto", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS){
