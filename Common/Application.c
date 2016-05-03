@@ -30,7 +30,7 @@ void APP_EventHandler(EVNT_Handle event) {
   case EVNT_STARTUP:
     LED1_On(); /* just do something */
 #if PL_CONFIG_HAS_BUZZER
-    BUZ_PlayTune(BUZ_TUNE_WELCOME);
+    BUZ_PlayTune();
 #endif
     break;
   case EVNT_LED_HEARTBEAT:
@@ -43,7 +43,7 @@ void APP_EventHandler(EVNT_Handle event) {
     //CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW1 pressed\r\n");
 #if PL_CONFIG_HAS_BUZZER
-    BUZ_PlayTune(BUZ_TUNE_BUTTON);
+    BUZ_PlayTune();
 #endif
     break;
   case EVNT_SW1_RELEASED:
@@ -56,7 +56,7 @@ void APP_EventHandler(EVNT_Handle event) {
     //CLS1_SendStr("SW1 long pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW1 long pressed\r\n");
 #if PL_CONFIG_HAS_BUZZER
-    BUZ_PlayTune(BUZ_TUNE_BUTTON_LONG);
+    BUZ_PlayTune();
 #endif
     break;
   #endif
