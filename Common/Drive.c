@@ -6,7 +6,7 @@
  * This module allows to drive the robot and to perform turns.
  */
 #include "Platform.h"
-#if PL_CONFIG_BOARD_HAS_DRIVE
+#if PL_CONFIG_HAS_DRIVE
 #include "Drive.h"
 #include "FRTOS1.h"
 #include "UTIL1.h"

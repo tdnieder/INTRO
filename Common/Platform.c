@@ -33,6 +33,9 @@
 #if PL_CONFIG_HAS_SHELL
   #include "Shell.h"
 #endif
+#if PL_CONFIG_HAS_SHELL_QUEUE
+#include "ShellQueue.h";
+#endif
 #if PL_CONFIG_HAS_REFLECTANCE
   #include "Reflectance.h"
 #endif
@@ -83,6 +86,9 @@ void PL_Init(void) {
 #endif
 #if PL_CONFIG_HAS_SHELL
   SHELL_Init();
+#endif
+#if PL_CONFIG_HAS_SHELL_QUEUE
+  SQUEUE_Init();
 #endif
 #if PL_CONFIG_HAS_REFLECTANCE
   REF_Init();
@@ -178,5 +184,8 @@ REF_Deinit();
 #endif
 #if PL_CONFIG_HAS_RADIO
 	RNETA_Deinit();
+#endif
+#if PL_CONFIG_HAS_SHELL_QUEUE
+  SQUEUE_Deinit();
 #endif
 }
