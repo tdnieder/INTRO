@@ -68,6 +68,37 @@ static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *da
 #endif /* PL_HAS_SHELL */      
       return ERR_OK;
     default: /*! \todo Handle your own messages here */
+    	switch (val) {
+    	case 'A':
+    		//do something when A is pressed
+    		break;
+    	case 'B':
+    		//do something whne B is pressed
+    		break;
+    	case 'C':
+    		//do something when C is pressed
+    		break;
+    	case 'D':
+    		//do something when D is pressed
+    		break;
+    	case 'E':
+    		//do something when E is pressed
+    		break;
+    	case 'F':
+    		//do something when F is pressed
+    		break;
+    	case 'K':
+    		//do something when K is pressed
+    		break;
+    	case 'X':
+    		//do something when X has been changed
+    		break;
+    	case 'Y':
+    		//do something when Y has been changed
+    		break;
+
+
+    	}
       break;
   } /* switch */
   return ERR_OK;

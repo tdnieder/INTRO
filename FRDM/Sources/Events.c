@@ -37,7 +37,10 @@ extern "C" {
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 #include "Platform.h"
+#include "Event.h"
 #include "Timer.h"
+#include "Keys.h"
+
 
 /*
 ** ===================================================================
@@ -57,24 +60,6 @@ void Cpu_OnNMIINT(void)
   /* Write your code here ... */
 }
 
-
-/*
-** ===================================================================
-**     Event       :  TMR_OnInterrupt (module Events)
-**
-**     Component   :  Cpu [MKL25Z128LK4]
-*/
-/*!
-**     @brief
-**         This event is called by the timer if set time has passed by.
-*/
-/* ===================================================================*/
-
-void TI1_OnInterrupt(void)
-{
-	TMR_OnInterrupt();
-}
-
 /*
 ** ===================================================================
 **     Event       :  SW7_OnInterrupt (module Events)
@@ -89,7 +74,9 @@ void TI1_OnInterrupt(void)
 */
 void SW7_OnInterrupt(void)
 {
-  /* Write your code here ... */
+#if PL_CONFIG_HAS_KEYS
+  KEY_OnInterrupt(KEY_BTN7);
+#endif
 }
 
 /*
@@ -106,7 +93,9 @@ void SW7_OnInterrupt(void)
 */
 void SW4_OnInterrupt(void)
 {
-  /* Write your code here ... */
+#if PL_CONFIG_HAS_KEYS
+  KEY_OnInterrupt(KEY_BTN4);
+#endif
 }
 
 /*
@@ -123,7 +112,9 @@ void SW4_OnInterrupt(void)
 */
 void SW3_OnInterrupt(void)
 {
-  /* Write your code here ... */
+#if PL_CONFIG_HAS_KEYS
+  KEY_OnInterrupt(KEY_BTN3);
+#endif
 }
 
 /*
@@ -140,7 +131,9 @@ void SW3_OnInterrupt(void)
 */
 void SW2_OnInterrupt(void)
 {
-  /* Write your code here ... */
+#if PL_CONFIG_HAS_KEYS
+  KEY_OnInterrupt(KEY_BTN2);
+#endif
 }
 
 /*
@@ -157,7 +150,30 @@ void SW2_OnInterrupt(void)
 */
 void SW1_OnInterrupt(void)
 {
-  /* Write your code here ... */
+#if PL_CONFIG_HAS_KEYS
+  KEY_OnInterrupt(KEY_BTN1);
+#endif
+}
+
+/*
+** ===================================================================
+**     Event       :  TI1_OnInterrupt (module Events)
+**
+**     Component   :  TI1 [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void TI1_OnInterrupt(void)
+{
+#if PL_CONFIG_HAS_TIMER
+  TMR_OnInterrupt();
+#endif
 }
 
 /*
@@ -203,7 +219,9 @@ void FRTOS1_vApplicationStackOverflowHook(xTaskHandle pxTask, char *pcTaskName)
 void FRTOS1_vApplicationTickHook(void)
 {
   /* Called for every RTOS tick. */
-  /* Write your code here ... */
+#if PL_CONFIG_HAS_TIMER
+  TMR_OnInterrupt();
+#endif
 }
 
 /*
@@ -254,7 +272,6 @@ void FRTOS1_vApplicationMallocFailedHook(void)
 #ifdef __cplusplus
 }  /* extern "C" */
 #endif 
-
 
 /*!
 ** @}

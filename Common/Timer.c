@@ -16,8 +16,9 @@
 
 void TMR_OnInterrupt(void) {
 	TRG_AddTick();
+#if PL_CONFIG_HAS_MOTOR_TACHO //make it work with FRDM
 	TACHO_Sample();
-
+#endif
 	/* this one gets called from an interrupt!!!! */
 
 
