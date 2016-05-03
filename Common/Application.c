@@ -17,7 +17,6 @@
   #include "Buzzer.h"
 #endif
 #if PL_CONFIG_HAS_RTOS
-  #include "FRTOS1.h"
   #include "RTOS.h"
 #endif
 #if PL_CONFIG_HAS_SHELL
@@ -27,37 +26,25 @@
 #if PL_CONFIG_HAS_EVENTS
 void APP_EventHandler(EVNT_Handle event) {
   switch(event) {
-  case EVNT_STARTUP:
-    LED1_On(); /* just do something */
-#if PL_CONFIG_HAS_BUZZER
-    BUZ_PlayTune();
-#endif
-    break;
-  case EVNT_LED_HEARTBEAT:
-    LED1_Neg();
-    break;
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
     LED2_Neg();
-    //CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
-    SHELL_SendString("SW1 pressed\r\n");
+    CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
+//    SHELL_SendString("SW1 pressed\r\n");
 #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune();
 #endif
     break;
   case EVNT_SW1_RELEASED:
     LED2_Neg();
-    //CLS1_SendStr("SW1 released\r\n", CLS1_GetStdio()->stdOut);
-    SHELL_SendString("SW1 released\r\n");
+    CLS1_SendStr("SW1 released\r\n", CLS1_GetStdio()->stdOut);
+    //SHELL_SendString("SW1 released\r\n");
     break;
   case EVNT_SW1_LPRESSED:
     LED2_Neg();
-    //CLS1_SendStr("SW1 long pressed\r\n", CLS1_GetStdio()->stdOut);
-    SHELL_SendString("SW1 long pressed\r\n");
-#if PL_CONFIG_HAS_BUZZER
-    BUZ_PlayTune();
-#endif
+    CLS1_SendStr("SW1 long pressed\r\n", CLS1_GetStdio()->stdOut);
+    //SHELL_SendString("SW1 long pressed\r\n");
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=2
