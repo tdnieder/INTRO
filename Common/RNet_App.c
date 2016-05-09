@@ -68,6 +68,27 @@ static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *da
 #endif /* PL_HAS_SHELL */      
       return ERR_OK;
     default: /*! \todo Handle your own messages here */
+    	/*switch (val) {
+    	    	case 'A':
+    	    		break;
+    	    	case 'B':
+    	    		break;
+    	    	case 'C':
+    	    		break;
+    	    	case 'D':
+    	    		break;
+    	    	case 'E':
+    	    		break;
+    	    	case 'F':
+    	    		break;
+    	    	case 'K':
+    	    		break;
+    	    	case 'X':
+    	    		break;
+    	    	case 'Y':
+    	    		break;
+    	    	}
+    	    	printf("%c received", data);*/
       break;
   } /* switch */
   return ERR_OK;
