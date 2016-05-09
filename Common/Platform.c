@@ -34,7 +34,7 @@
   #include "Shell.h"
 #endif
 #if PL_CONFIG_HAS_SHELL_QUEUE
-#include "ShellQueue.h";
+#include "ShellQueue.h"
 #endif
 #if PL_CONFIG_HAS_REFLECTANCE
   #include "Reflectance.h"

@@ -23805,7 +23805,11 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
+<<<<<<< HEAD
     <BeanVersion>01.069</BeanVersion>
+=======
+    <BeanVersion>01.068</BeanVersion>
+>>>>>>> origin/master
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -24200,7 +24204,11 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
+<<<<<<< HEAD
     <BeanVersion>01.041</BeanVersion>
+=======
+    <BeanVersion>01.039</BeanVersion>
+>>>>>>> origin/master
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -24213,7 +24221,11 @@
         <ItemSymbol>SystemViewVersion</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
+<<<<<<< HEAD
         <Value>V2.34</Value>
+=======
+        <Value>V2.32a</Value>
+>>>>>>> origin/master
       </ItemState>
       <ItemState>
         <ItemSymbol>SysViewAppName</ItemSymbol>
@@ -24307,12 +24319,15 @@
         <Value>1024</Value>
         <Base>DEC</Base>
       </ItemState>
+<<<<<<< HEAD
       <ItemState>
         <ItemSymbol>sdk</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <Value>KSDK1</Value>
       </ItemState>
+=======
+>>>>>>> origin/master
     </Properties>
     <Methods>
       <ItemState>
@@ -24483,7 +24498,11 @@
     <UserFolderName>Reflectance</UserFolderName>
     <Comment lines_count="0" />
     <Template />
+<<<<<<< HEAD
     <BeanVersion>01.072</BeanVersion>
+=======
+    <BeanVersion>01.071</BeanVersion>
+>>>>>>> origin/master
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
