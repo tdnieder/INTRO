@@ -3,7 +3,7 @@
   <Header>
     <Name>Robo</Name>
     <SavedBy>Ueli</SavedBy>
-    <ModificationStamp>50</ModificationStamp>
+    <ModificationStamp>49</ModificationStamp>
     <Date>2016-02-29</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.0.RT7_b1515-0427</PEversion>
@@ -23805,11 +23805,7 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
-<<<<<<< HEAD
     <BeanVersion>01.069</BeanVersion>
-=======
-    <BeanVersion>01.068</BeanVersion>
->>>>>>> origin/master
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -24204,11 +24200,7 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
-<<<<<<< HEAD
     <BeanVersion>01.041</BeanVersion>
-=======
-    <BeanVersion>01.039</BeanVersion>
->>>>>>> origin/master
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -24221,11 +24213,7 @@
         <ItemSymbol>SystemViewVersion</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-<<<<<<< HEAD
         <Value>V2.34</Value>
-=======
-        <Value>V2.32a</Value>
->>>>>>> origin/master
       </ItemState>
       <ItemState>
         <ItemSymbol>SysViewAppName</ItemSymbol>
@@ -24319,15 +24307,12 @@
         <Value>1024</Value>
         <Base>DEC</Base>
       </ItemState>
-<<<<<<< HEAD
       <ItemState>
         <ItemSymbol>sdk</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <Value>KSDK1</Value>
       </ItemState>
-=======
->>>>>>> origin/master
     </Properties>
     <Methods>
       <ItemState>
@@ -24498,11 +24483,7 @@
     <UserFolderName>Reflectance</UserFolderName>
     <Comment lines_count="0" />
     <Template />
-<<<<<<< HEAD
     <BeanVersion>01.072</BeanVersion>
-=======
-    <BeanVersion>01.071</BeanVersion>
->>>>>>> origin/master
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -42902,7 +42883,7 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>30</Value>
+        <Value>42</Value>
         <Base>DEC</Base>
       </ItemState>
       <ItemState>
