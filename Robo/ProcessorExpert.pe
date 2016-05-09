@@ -3,7 +3,7 @@
   <Header>
     <Name>Robo</Name>
     <SavedBy>Ueli</SavedBy>
-    <ModificationStamp>49</ModificationStamp>
+    <ModificationStamp>50</ModificationStamp>
     <Date>2016-02-29</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.0.RT7_b1515-0427</PEversion>
@@ -13035,7 +13035,7 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
-    <BeanVersion>01.008</BeanVersion>
+    <BeanVersion>01.010</BeanVersion>
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -13043,6 +13043,12 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <Value>HF1</Value>
+      </ItemState>
+      <ItemState>
+        <ItemSymbol>sdk</ItemSymbol>
+        <ReadOnly>false</ReadOnly>
+        <UserReadOnly>false</UserReadOnly>
+        <Value>KSDK1</Value>
       </ItemState>
     </Properties>
     <Methods>
@@ -21585,7 +21591,7 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
-    <BeanVersion>01.451</BeanVersion>
+    <BeanVersion>01.464</BeanVersion>
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -21599,6 +21605,12 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <Value>V8.2.3</Value>
+      </ItemState>
+      <ItemState>
+        <ItemSymbol>KinetisSDK</ItemSymbol>
+        <ReadOnly>false</ReadOnly>
+        <UserReadOnly>false</UserReadOnly>
+        <Value>KSDK1</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>KinetisSDKGroup</ItemSymbol>
@@ -21623,12 +21635,6 @@
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
         <Index>1</Index>
         <Value>false</Value>
-      </ItemState>
-      <ItemState>
-        <ItemSymbol>KinetisSDK</ItemSymbol>
-        <ReadOnly>false</ReadOnly>
-        <UserReadOnly>false</UserReadOnly>
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>CustomPortGroup</ItemSymbol>
@@ -21677,6 +21683,12 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <Value>FreeRTOS\port</Value>
+      </ItemState>
+      <ItemState>
+        <ItemSymbol>RTOSMemMangFolderName</ItemSymbol>
+        <ReadOnly>false</ReadOnly>
+        <UserReadOnly>false</UserReadOnly>
+        <Value>FreeRTOS\Source\portable\MemMang</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>RTOSConfigFolderName</ItemSymbol>
@@ -23793,7 +23805,11 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
+<<<<<<< HEAD
+    <BeanVersion>01.069</BeanVersion>
+=======
     <BeanVersion>01.068</BeanVersion>
+>>>>>>> origin/master
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -23961,6 +23977,12 @@
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
         <Index>0</Index>
         <EnumSymbVal>SEGGER_RTT_MODE_NO_BLOCK_SKIP</EnumSymbVal>
+      </ItemState>
+      <ItemState>
+        <ItemSymbol>sdk</ItemSymbol>
+        <ReadOnly>false</ReadOnly>
+        <UserReadOnly>false</UserReadOnly>
+        <Value>KSDK1</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>KinetisSDK</ItemSymbol>
@@ -24182,7 +24204,11 @@
     <UserFolderName />
     <Comment lines_count="0" />
     <Template />
+<<<<<<< HEAD
+    <BeanVersion>01.041</BeanVersion>
+=======
     <BeanVersion>01.039</BeanVersion>
+>>>>>>> origin/master
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -24195,7 +24221,11 @@
         <ItemSymbol>SystemViewVersion</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
+<<<<<<< HEAD
+        <Value>V2.34</Value>
+=======
         <Value>V2.32a</Value>
+>>>>>>> origin/master
       </ItemState>
       <ItemState>
         <ItemSymbol>SysViewAppName</ItemSymbol>
@@ -24289,6 +24319,15 @@
         <Value>1024</Value>
         <Base>DEC</Base>
       </ItemState>
+<<<<<<< HEAD
+      <ItemState>
+        <ItemSymbol>sdk</ItemSymbol>
+        <ReadOnly>false</ReadOnly>
+        <UserReadOnly>false</UserReadOnly>
+        <Value>KSDK1</Value>
+      </ItemState>
+=======
+>>>>>>> origin/master
     </Properties>
     <Methods>
       <ItemState>
@@ -24459,7 +24498,11 @@
     <UserFolderName>Reflectance</UserFolderName>
     <Comment lines_count="0" />
     <Template />
+<<<<<<< HEAD
+    <BeanVersion>01.072</BeanVersion>
+=======
     <BeanVersion>01.071</BeanVersion>
+>>>>>>> origin/master
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -38102,7 +38145,7 @@
     <UserFolderName>Motor</UserFolderName>
     <Comment lines_count="0" />
     <Template />
-    <BeanVersion>01.026</BeanVersion>
+    <BeanVersion>01.030</BeanVersion>
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -39389,6 +39432,12 @@
         <UserReadOnly>false</UserReadOnly>
         <Value>UTIL1</Value>
       </ItemState>
+      <ItemState>
+        <ItemSymbol>sdk</ItemSymbol>
+        <ReadOnly>false</ReadOnly>
+        <UserReadOnly>false</UserReadOnly>
+        <Value>KSDK1</Value>
+      </ItemState>
     </Properties>
     <Methods>
       <ItemState>
@@ -39445,6 +39494,17 @@
         <LastSelection>false</LastSelection>
         <LastUserSel>yes</LastUserSel>
         <UsrMethodName>NofErrors</UsrMethodName>
+      </ItemState>
+      <ItemState>
+        <ItemSymbol>SwapPins</ItemSymbol>
+        <ReadOnly>false</ReadOnly>
+        <UserReadOnly>false</UserReadOnly>
+        <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <Index>1</Index>
+        <Value>false</Value>
+        <LastSelection>true</LastSelection>
+        <LastUserSel>no</LastUserSel>
+        <UsrMethodName>SwapPins</UsrMethodName>
       </ItemState>
       <ItemState>
         <ItemSymbol>Deinit</ItemSymbol>
@@ -39516,7 +39576,7 @@
     <UserFolderName>Motor</UserFolderName>
     <Comment lines_count="0" />
     <Template />
-    <BeanVersion>01.026</BeanVersion>
+    <BeanVersion>01.030</BeanVersion>
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -40803,6 +40863,12 @@
         <UserReadOnly>false</UserReadOnly>
         <Value>UTIL1</Value>
       </ItemState>
+      <ItemState>
+        <ItemSymbol>sdk</ItemSymbol>
+        <ReadOnly>false</ReadOnly>
+        <UserReadOnly>false</UserReadOnly>
+        <Value>KSDK1</Value>
+      </ItemState>
     </Properties>
     <Methods>
       <ItemState>
@@ -40859,6 +40925,17 @@
         <LastSelection>false</LastSelection>
         <LastUserSel>yes</LastUserSel>
         <UsrMethodName>NofErrors</UsrMethodName>
+      </ItemState>
+      <ItemState>
+        <ItemSymbol>SwapPins</ItemSymbol>
+        <ReadOnly>false</ReadOnly>
+        <UserReadOnly>false</UserReadOnly>
+        <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <Index>1</Index>
+        <Value>false</Value>
+        <LastSelection>true</LastSelection>
+        <LastUserSel>no</LastUserSel>
+        <UsrMethodName>SwapPins</UsrMethodName>
       </ItemState>
       <ItemState>
         <ItemSymbol>Deinit</ItemSymbol>
@@ -42785,7 +42862,7 @@
     <UserFolderName>nRF</UserFolderName>
     <Comment lines_count="0" />
     <Template />
-    <BeanVersion>01.083</BeanVersion>
+    <BeanVersion>01.084</BeanVersion>
     <LightErrorsIgnored>false</LightErrorsIgnored>
     <Properties>
       <ItemState>
@@ -42825,7 +42902,7 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>42</Value>
+        <Value>30</Value>
         <Base>DEC</Base>
       </ItemState>
       <ItemState>
