@@ -134,4 +134,7 @@ void APP_Start(void) {
 #endif
 }
 
-
+void APP_DebugPrint(unsigned char *msg)
+{
+	SHELL_SendString(msg);
+}
