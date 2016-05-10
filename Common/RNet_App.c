@@ -22,6 +22,13 @@
 #include "RPHY.h"
 #include "Shell.h"
 #include "Motor.h"
+#if PL_CONFIG_HAS_DRIVE
+	#include "Drive.h"
+#endif
+#if PL_CONFIG_HAS_LINE_FOLLOW
+#include "LineFollow.h"
+#endif
+
 #if PL_CONFIG_HAS_REMOTE
   #include "Remote.h"
 #endif
@@ -46,6 +53,7 @@ static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *da
   CLS1_ConstStdIOTypePtr io = CLS1_GetStdio();
 #endif
   uint8_t val;
+  char* str;
   
   (void)size;
   (void)packet;
@@ -66,29 +74,38 @@ static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *da
       UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
       CLS1_SendStr(buf, io->stdOut);
 #endif /* PL_HAS_SHELL */      
+      if(val == 10){
+    	  str = "A\0";
+#if PL_CONFIG_HAS_BUZZER
+    	  SHELL_ParseCmd((unsigned char*)"buzzer buz 440 500");
+#endif
+      }
+      if(val == 11){
+    	  str = "B\0";
+      }
+      if(val == 12){
+    	  str = "C\0";
+      }
+      if(val == 13){
+    	  str = "D\0";
+      }
+      if(val == 14){
+    	  str = "E\0";
+      }
+      if(val == 15){
+    	  str = "F\0";
+#if PL_CONFIG_HAS_LINE_FOLLOW
+    	  LF_StartStopFollowing();
+#endif
+      }
+      if(val == 16){
+    	  str = "K\0";
+      }
+#if PL_CONFIG_HAS_SHELL
+      CLS1_SendStr(str, io->stdOut);
+#endif
       return ERR_OK;
     default: /*! \todo Handle your own messages here */
-    	/*switch (val) {
-    	    	case 'A':
-    	    		break;
-    	    	case 'B':
-    	    		break;
-    	    	case 'C':
-    	    		break;
-    	    	case 'D':
-    	    		break;
-    	    	case 'E':
-    	    		break;
-    	    	case 'F':
-    	    		break;
-    	    	case 'K':
-    	    		break;
-    	    	case 'X':
-    	    		break;
-    	    	case 'Y':
-    	    		break;
-    	    	}
-    	    	printf("%c received", data);*/
       break;
   } /* switch */
   return ERR_OK;
