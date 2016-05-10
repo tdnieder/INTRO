@@ -8,7 +8,11 @@
 #ifndef SOURCES_FS2016_COMMON_APPLICATION_H_
 #define SOURCES_FS2016_COMMON_APPLICATION_H_
 
+#include "Event.h"
+
+
 void APP_Start(void);
+void APP_EventHandler(EVNT_Handle event);
 void APP_DebugPrint(unsigned char *msg);
 
 

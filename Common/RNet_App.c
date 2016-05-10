@@ -30,7 +30,7 @@
 #endif
 
 #if PL_CONFIG_HAS_REMOTE
-  #include "Remote.h"
+	#include "Remote.h"
 #endif
 
 static RNWK_ShortAddrType APP_dstAddr = RNWK_ADDR_BROADCAST; /* destination node address */

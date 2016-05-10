@@ -12,7 +12,6 @@
 #include "Event.h"
 #include "Keys.h"
 #include "Application.h"
-
 /**
  * App-Task contains LED Heartbeat
  */
@@ -20,8 +19,11 @@ static void AppTask(void* param) {
   (void)param; /* avoid compiler warning */
   EVNT_SetEvent(EVNT_STARTUP); /* set startup event */
   for(;;) {
-    LED1_Neg();
-    FRTOS1_vTaskDelay(500/portTICK_PERIOD_MS);
+	  EVNT_HandleEvent(APP_EventHandler, TRUE);
+	  KEY_Scan();
+	  LED1_Neg();
+      FRTOS1_vTaskDelay(500/portTICK_PERIOD_MS);
+
   }
 }
 

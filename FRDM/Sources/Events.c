@@ -152,7 +152,7 @@ void SW1_OnInterrupt(void)
 {
 #if PL_CONFIG_HAS_KEYS
   KEY_OnInterrupt(KEY_BTN1);
-#endif
+  #endif
 }
 
 /*

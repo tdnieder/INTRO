@@ -74,7 +74,7 @@
 #define PL_CONFIG_HAS_LINE_FOLLOW       (1 && PL_CONFIG_HAS_DRIVE)
 #define PL_CONFIG_HAS_RADIO             (1)
 //#define RNET_CONFIG_REMOTE_STDIO        (0) /* temporary only, to be remove when RNET gets added */
-#define PL_CONFIG_HAS_REMOTE            (0)
+#define PL_CONFIG_HAS_REMOTE            (1)
 #define PL_CONFIG_CONTROL_SENDER        (1 && PL_CONFIG_BOARD_IS_FRDM)
 #define PL_CONFIG_HAS_JOYSTICK          (1 && PL_CONFIG_BOARD_IS_FRDM)
 #define PL_CONFIG_HAS_TURN              (0)

@@ -13,6 +13,8 @@
 #include "CS1.h"
 #include "Keys.h"
 #include "CLS1.h"
+#include "RApp.h"
+#include "RNet_App.c"
 #if PL_CONFIG_HAS_BUZZER
   #include "Buzzer.h"
 #endif
@@ -27,12 +29,19 @@
 void APP_EventHandler(EVNT_Handle event) {
   switch(event) {
 #if PL_CONFIG_HAS_KEYS
+  uint8_t val;  // send value
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
-    LED2_Neg();
-    CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
-//    SHELL_SendString("SW1 pressed\r\n");
-#if PL_CONFIG_HAS_BUZZER
+	  #if PL_CONFIG_HAS_SHELL
+//    CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
+    SHELL_SendString("SW1 pressed\r\n");
+	  #endif
+	  #if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
+    val = "A";
+    RAPP_SendPayloadDataBlock(*val, sizeof(val),RAPP_MSG_TYPE_JOYSTICK_BTN,RNETA_GetDestAddr(),TRUE);
+      #endif
+
+    #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune();
 #endif
     break;
