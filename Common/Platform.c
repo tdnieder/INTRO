@@ -57,6 +57,9 @@
 #if PL_CONFIG_HAS_RADIO
 	#include "RNet_App.h"
 #endif
+#if PL_CONFIG_HAS_REMOTE
+	#include "Remote.h"
+#endif
 
 
 void PL_Init(void) {
@@ -111,7 +114,11 @@ void PL_Init(void) {
 #if PL_CONFIG_HAS_RADIO
 	RNETA_Init();
 #endif
+#if PL_CONFIG_HAS_REMOTE
+	REMOTE_Init();
+#endif
 }
+
 void PL_Deinit(void) {
 #if PL_CONFIG_HAS_TRIGGER
   TRG_Deinit();
@@ -163,5 +170,8 @@ REF_Deinit();
 #endif
 #if PL_CONFIG_HAS_SHELL_QUEUE
   SQUEUE_Deinit();
+#endif
+#if PL_CONFIG_HAS_REMOTE
+  REMOTE_Deinit();
 #endif
 }

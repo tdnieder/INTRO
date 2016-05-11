@@ -77,8 +77,9 @@
 #define PL_CONFIG_HAS_REMOTE            (1)
 #define PL_CONFIG_CONTROL_SENDER        (1 && PL_CONFIG_BOARD_IS_FRDM)
 #define PL_CONFIG_HAS_JOYSTICK          (1 && PL_CONFIG_BOARD_IS_FRDM)
-#define PL_CONFIG_HAS_TURN              (0)
-#define PL_CONFIG_HAS_LINE_MAZE         (0)
+#define PL_CONFIG_HAS_TURN              (1 && PL_CONFIG_HAS_QUADRATURE)
+#define PL_CONFIG_HAS_LINE_MAZE         (1 && PL_CONFIG_HAS_LINE_FOLLOW)
+#define PL_CONFIG_HAS_CONFIG_NVM        (0)
 
 
 /* interface */

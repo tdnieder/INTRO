@@ -28,12 +28,16 @@
 #if PL_CONFIG_HAS_LINE_FOLLOW
 #include "LineFollow.h"
 #endif
-
+#if PL_CONFIG_HAS_BUZZER
+#include "Buzzer.h"
+#endif
 #if PL_CONFIG_HAS_REMOTE
 	#include "Remote.h"
 #endif
 
 static RNWK_ShortAddrType APP_dstAddr = RNWK_ADDR_BROADCAST; /* destination node address */
+
+const int SPEED_DIVIDER = 10;
 
 typedef enum {
   RNETA_NONE,
@@ -58,6 +62,7 @@ static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *da
   (void)size;
   (void)packet;
   switch(type) {
+
     case RAPP_MSG_TYPE_DATA: /* generic data message */
       *handled = TRUE;
       val = *data; /* get data value */
@@ -73,38 +78,65 @@ static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *da
 #endif
       UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
       CLS1_SendStr(buf, io->stdOut);
-#endif /* PL_HAS_SHELL */      
-      if(val == 10){
-    	  str = "A\0";
-#if PL_CONFIG_HAS_BUZZER
-    	  SHELL_ParseCmd((unsigned char*)"buzzer buz 440 500");
-#endif
-      }
-      if(val == 11){
-    	  str = "B\0";
-      }
-      if(val == 12){
-    	  str = "C\0";
-      }
-      if(val == 13){
-    	  str = "D\0";
-      }
-      if(val == 14){
-    	  str = "E\0";
-      }
-      if(val == 15){
-    	  str = "F\0";
-#if PL_CONFIG_HAS_LINE_FOLLOW
-    	  LF_StartStopFollowing();
-#endif
-      }
-      if(val == 16){
-    	  str = "K\0";
-      }
-#if PL_CONFIG_HAS_SHELL
-      CLS1_SendStr(str, io->stdOut);
-#endif
+#endif /* PL_HAS_SHELL */
       return ERR_OK;
+
+    case RAPP_MSG_TYPE_JOYSTICK_BTN: /* button information*/
+    	*handled = TRUE;
+    	val = *data;
+
+    	if(val == 'A'){
+    	    	  str = "A\0";
+    	    	  /*! \todo add function of button A here*/
+    	      }
+    	      if(val == 'B'){
+    	    	  str = "B\0";
+    	    	  /*! \todo add function of button B here*/
+    	      }
+    	      if(val == 'C'){
+    	    	  str = "C\0";
+    	    	  /*! \todo add function of button C here*/
+    	      }
+    	      if(val == 'D'){
+    	    	  str = "D\0";
+    	    	  /*! \todo add function of button d here*/
+    	      }
+    	      if(val == 'E'){
+    	    	  str = "E\0";
+				#if PL_CONFIG_HAS_BUZZER
+    	    	  BUZ_Beep(440, 100);
+    	    	  BUZ_Beep(560, 200);
+				#endif
+    	   	   	#if PL_CONFIG_HAS_LINE_FOLLOW
+    	    	  LF_StartStopFollowing();
+				#endif
+    	      }
+    	      if(val == 'F'){
+    	    	  str = "F\0";
+				/*! \todo add function of button f here*/
+    	      }
+    	      if(val == 'K'){
+    	    	  str = "K\0";
+    	    	  /*! \todo add function of button k here*/
+    	      }
+    	      return ERR_OK;
+
+    case RAPP_MSG_TYPE_JOYSTICK_XY: /*joystick information*/
+    	int8_t x, y;
+    	int16_t x1000, y1000;
+
+    	*handled = TRUE;
+    	x = *data; // value of joystick x-axis
+    	y = *(data+1); //value of joystick y-axis
+    	if(REMO){
+    		str = "X moved\0";
+    	    	  /*! \todo implement turn, which isnot included yet*/
+    	}
+    	str = "Y moved\0";
+    	#if PL_CONFIG_HAS_SHELL
+    	      CLS1_SendStr(str, io->stdOut);
+    	#endif
+    	      return ERR_OK;
     default: /*! \todo Handle your own messages here */
       break;
   } /* switch */
@@ -169,6 +201,7 @@ static void RadioTask(void *pvParameters) {
   (void)pvParameters; /* not used */
   Init(); /* initialize address */
   appState = RNETA_NONE; /* set state machine state */
+  configASSERT(portTICK_PERIOD_MS<=2);
   for(;;) {
     Process(); /* process state machine and radio in/out queues */
     FRTOS1_vTaskDelay(2/portTICK_PERIOD_MS);
