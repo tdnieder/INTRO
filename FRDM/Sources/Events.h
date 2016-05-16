@@ -43,6 +43,7 @@
 #include "BitIoLdd12.h"
 #include "SM1.h"
 #include "SMasterLdd1.h"
+#include "KIN1.h"
 #include "LEDpin1.h"
 #include "BitIoLdd1.h"
 #include "HF1.h"
