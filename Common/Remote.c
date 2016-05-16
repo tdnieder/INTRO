@@ -292,6 +292,8 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
       } else if (val=='C') { /* red 'C' button */
         /*! \todo add functionality */
       } else if (val=='A') { /* green 'A' button */
+    	  SHELL_SendString("Remote Online");
+    	  BUZ_Beep(440, 500);
         /*! \todo add functionality */
       } else if (val=='D') { /* button 'D' */
     	/*! \todo add functionality */
