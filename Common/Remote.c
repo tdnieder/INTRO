@@ -293,6 +293,13 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         /*! \todo add functionality */
       } else if (val=='A') { /* green 'A' button */
         /*! \todo add functionality */
+      } else if (val=='D') { /* button 'D' */
+    	/*! \todo add functionality */
+      } else if (val=='E') { /* button 'E' */
+    	  /*! \todo add functionality */
+#if PL_CONFIG_HAS_LINE_FOLLOW
+    	  LF_StartFollowing(); /* Start line follow */
+#endif
       }
 #else
       *handled = FALSE; /* no shell and no buzzer? */

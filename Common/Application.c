@@ -29,7 +29,7 @@
 void APP_EventHandler(EVNT_Handle event) {
   switch(event) {
 #if PL_CONFIG_HAS_KEYS
-  uint8_t val;  // send value
+  uint8_t *val;  // send value
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
 	  #if PL_CONFIG_HAS_SHELL
@@ -37,8 +37,8 @@ void APP_EventHandler(EVNT_Handle event) {
     SHELL_SendString("SW1 pressed\r\n");
 	  #endif
 	  #if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
-    val = "A";
-    RAPP_SendPayloadDataBlock(*val, sizeof(val),RAPP_MSG_TYPE_JOYSTICK_BTN,RNETA_GetDestAddr(),TRUE);
+    *val = 'A';
+    RAPP_SendPayloadDataBlock(val, sizeof(val),RAPP_MSG_TYPE_JOYSTICK_BTN,RNETA_GetDestAddr(),TRUE);
       #endif
 
     #if PL_CONFIG_HAS_BUZZER
