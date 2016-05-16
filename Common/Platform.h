@@ -61,7 +61,7 @@
 #define PL_CONFIG_HAS_SEGGER_RTT        (0 && PL_CONFIG_HAS_SHELL) /* using RTT with shell */
 #define PL_CONFIG_HAS_SHELL_QUEUE       (1 && PL_CONFIG_HAS_SHELL) /* enable shell queueing */
 #define PL_CONFIG_SQUEUE_SINGLE_CHAR    (1 && PL_CONFIG_HAS_SHELL_QUEUE) /* using single character shell queue */
-#define PL_CONFIG_HAS_SEMAPHORE         (1) /* semaphore tests */
+#define PL_CONFIG_HAS_SEMAPHORE         (0) /* semaphore tests */
 #define PL_CONFIG_HAS_REFLECTANCE       (1 && PL_CONFIG_BOARD_IS_ROBO)
 #define PL_CONFIG_HAS_MOTOR             (1 && PL_CONFIG_BOARD_IS_ROBO)
 #define PL_CONFIG_HAS_QUADRATURE        (1 && PL_CONFIG_HAS_MOTOR)
@@ -77,8 +77,8 @@
 #define PL_CONFIG_HAS_REMOTE            (1)
 #define PL_CONFIG_CONTROL_SENDER        (1 && PL_CONFIG_BOARD_IS_FRDM)
 #define PL_CONFIG_HAS_JOYSTICK          (1 && PL_CONFIG_BOARD_IS_FRDM)
-#define PL_CONFIG_HAS_TURN              (1 && PL_CONFIG_HAS_QUADRATURE)
-#define PL_CONFIG_HAS_LINE_MAZE         (1 && PL_CONFIG_HAS_LINE_FOLLOW)
+#define PL_CONFIG_HAS_TURN              (0 && PL_CONFIG_HAS_QUADRATURE)
+#define PL_CONFIG_HAS_LINE_MAZE         (0 && PL_CONFIG_HAS_LINE_FOLLOW)
 #define PL_CONFIG_HAS_CONFIG_NVM        (0)
 
 
