@@ -252,14 +252,44 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
           UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
           SHELL_SendString(buf);
         }
-  #if 0 /* using shell command */
+  #if 1 /* using shell command */
         UTIL1_strcpy(buf, sizeof(buf), (unsigned char*)"motor L duty ");
-        UTIL1_strcatNum8s(buf, sizeof(buf), scaleSpeedToPercent(x));
+        if(x<0)
+        {
+        UTIL1_strcatNum8s(buf, sizeof(buf), (int8_t)(x/10+y/10));
+        }
+      	if(x>0)
+      	{
+        UTIL1_strcatNum8s(buf, sizeof(buf), (int8_t)(x/10+y/10));
+      	}
+      	if(x=0)
+      	{
+        UTIL1_strcatNum8s(buf, sizeof(buf), (int8_t)(y/10));
+      	}
+        UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
+        SHELL_SendString(buf);
         SHELL_ParseCmd(buf);
+
+        // Motor Right
         UTIL1_strcpy(buf, sizeof(buf), (unsigned char*)"motor R duty ");
-        UTIL1_strcatNum8s(buf, sizeof(buf), scaleSpeedToPercent(y));
+        if(x<0)
+        {
+        UTIL1_strcatNum8s(buf, sizeof(buf), (int8_t)(x/10+y/10));
+        }
+      	if(x>0)
+      	{
+        UTIL1_strcatNum8s(buf, sizeof(buf), (int8_t)(x/10+y/10));
+      	}
+      	if(x=0)
+      	{
+        UTIL1_strcatNum8s(buf, sizeof(buf), (int8_t)(y/10));
+      	}
+        UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
+        SHELL_SendString(buf);
         SHELL_ParseCmd(buf);
-  #endif
+
+
+        #endif
         /* filter noise around zero */
         if (x>-5 && x<5) {
           x = 0;
