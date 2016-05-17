@@ -37,7 +37,7 @@ void APP_EventHandler(EVNT_Handle event) {
 	  #endif
 	  #if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
     val = 'A';
-    RAPP_SendPayloadDataBlock(val, sizeof(val), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), TRUE);
+    RAPP_SendPayloadDataBlock(val, sizeof(val), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_NONE);
       #endif
 
     #if PL_CONFIG_HAS_BUZZER
@@ -45,54 +45,54 @@ void APP_EventHandler(EVNT_Handle event) {
 #endif
     break;
   case EVNT_SW1_RELEASED:
-    LED2_Neg();
+    //LED2_Neg();
     CLS1_SendStr("SW1 released\r\n", CLS1_GetStdio()->stdOut);
     //SHELL_SendString("SW1 released\r\n");
     break;
   case EVNT_SW1_LPRESSED:
-    LED2_Neg();
+    //LED2_Neg();
     CLS1_SendStr("SW1 long pressed\r\n", CLS1_GetStdio()->stdOut);
     //SHELL_SendString("SW1 long pressed\r\n");
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=2
   case EVNT_SW2_PRESSED:
-    LED2_Neg();
+    //LED2_Neg();
     //CLS1_SendStr("SW2 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW2 pressed\r\n");
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=3
   case EVNT_SW3_PRESSED:
-    LED2_Neg();
+    //LED2_Neg();
     //CLS1_SendStr("SW3 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW3 pressed\r\n");
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=4
   case EVNT_SW4_PRESSED:
-    LED2_Neg();
+    //LED2_Neg();
     //CLS1_SendStr("SW4 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW4 pressed\r\n");
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=5
   case EVNT_SW5_PRESSED:
-    LED2_Neg();
+    //LED2_Neg();
     //CLS1_SendStr("SW5 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW5 pressed\r\n");
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=6
   case EVNT_SW6_PRESSED:
-    LED2_Neg();
+    //LED2_Neg();
     //CLS1_SendStr("SW6 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW6 pressed\r\n");
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=7
   case EVNT_SW7_PRESSED:
-    LED2_Neg();
+    //LED2_Neg();
     //CLS1_SendStr("SW7 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW7 pressed\r\n");
     break;

@@ -129,7 +129,7 @@ static void RemoteTask (void *pvParameters) {
           SHELL_SendString(txtBuf);
         }
         (void)RAPP_SendPayloadDataBlock(buf, sizeof(buf), RAPP_MSG_TYPE_JOYSTICK_XY, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_REQ_ACK);
-        LED1_Neg();
+        //LED1_Neg();
       }
 #endif
       FRTOS1_vTaskDelay(200/portTICK_PERIOD_MS);
@@ -292,7 +292,7 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
       } else if (val=='C') { /* red 'C' button */
         /*! \todo add functionality */
       } else if (val=='A') { /* green 'A' button */
-    	  SHELL_SendString("Remote Online");
+    	  SHELL_SendString("Remote Online\r\n");
     	  BUZ_Beep(440, 500);
         /*! \todo add functionality */
       } else if (val=='D') { /* button 'D' */

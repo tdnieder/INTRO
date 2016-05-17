@@ -41,7 +41,8 @@ RNWK_ShortAddrType RNETA_GetDestAddr(void) {
 }
 
 static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *data, RNWK_ShortAddrType srcAddr, bool *handled, RPHY_PacketDesc *packet) {
-#if PL_CONFIG_HAS_SHELL
+	REMOTE_HandleRemoteRxMessage(type, size, data, srcAddr, handled, packet);
+	#if PL_CONFIG_HAS_SHELL
   uint8_t buf[32];
   CLS1_ConstStdIOTypePtr io = CLS1_GetStdio();
 #endif
