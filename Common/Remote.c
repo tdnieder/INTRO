@@ -252,7 +252,9 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
           UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
           SHELL_SendString(buf);
         }
-  #if 1 /* using shell command */
+
+
+  #if 0 /* using shell command */
         UTIL1_strcpy(buf, sizeof(buf), (unsigned char*)"motor L duty ");
         if(x<0)
         {
@@ -288,7 +290,6 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         SHELL_SendString(buf);
         SHELL_ParseCmd(buf);
 
-
         #endif
         /* filter noise around zero */
         if (x>-5 && x<5) {
@@ -314,7 +315,7 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         REMOTE_SetOnOff(FALSE);
         DRV_SetSpeed(0,0); /* turn off motors */
         SHELL_SendString("Remote OFF\r\n");
-      } else if (val=='G') { /* center joystick button: enable remote */
+      } else if (val=='K') { /* center joystick button: enable remote */
         SHELL_ParseCmd((unsigned char*)"buzzer buz 300 1000");
         REMOTE_SetOnOff(TRUE);
         DRV_SetMode(DRV_MODE_SPEED);

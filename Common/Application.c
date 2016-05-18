@@ -26,23 +26,23 @@
 
 #if PL_CONFIG_HAS_EVENTS
 void APP_EventHandler(EVNT_Handle event) {
+	uint8_t val;  // value for transmission
   switch(event) {
 #if PL_CONFIG_HAS_KEYS
-  uint8_t val;  // send value
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
-	  #if PL_CONFIG_HAS_SHELL
-//    CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
+	#if PL_CONFIG_HAS_SHELL
+//  CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW1 pressed\r\n");
-	  #endif
-	  #if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
+	 #endif
+
+	#if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
     val = 'A';
-    RAPP_SendPayloadDataBlock(val, sizeof(val), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_NONE);
-      #endif
+    #endif
 
     #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune();
-#endif
+	#endif
     break;
   case EVNT_SW1_RELEASED:
     //LED2_Neg();
@@ -60,6 +60,11 @@ void APP_EventHandler(EVNT_Handle event) {
     //LED2_Neg();
     //CLS1_SendStr("SW2 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW2 pressed\r\n");
+
+	#if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
+    val = 'B';
+    #endif
+
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=3
@@ -67,6 +72,11 @@ void APP_EventHandler(EVNT_Handle event) {
     //LED2_Neg();
     //CLS1_SendStr("SW3 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW3 pressed\r\n");
+
+	#if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
+    val = 'C';
+    #endif
+
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=4
@@ -74,6 +84,11 @@ void APP_EventHandler(EVNT_Handle event) {
     //LED2_Neg();
     //CLS1_SendStr("SW4 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW4 pressed\r\n");
+
+    #if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
+    val = 'D';
+    #endif
+
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=5
@@ -81,6 +96,11 @@ void APP_EventHandler(EVNT_Handle event) {
     //LED2_Neg();
     //CLS1_SendStr("SW5 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW5 pressed\r\n");
+
+    #if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
+    val = 'E';
+    #endif
+
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=6
@@ -88,6 +108,11 @@ void APP_EventHandler(EVNT_Handle event) {
     //LED2_Neg();
     //CLS1_SendStr("SW6 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW6 pressed\r\n");
+
+	#if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
+    val = 'F';
+    #endif
+
     break;
   #endif
   #if PL_CONFIG_NOF_KEYS>=7
@@ -95,10 +120,24 @@ void APP_EventHandler(EVNT_Handle event) {
     //LED2_Neg();
     //CLS1_SendStr("SW7 pressed\r\n", CLS1_GetStdio()->stdOut);
     SHELL_SendString("SW7 pressed\r\n");
+
+	#if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
+    val = 'K';
+    #endif
+
     break;
   #endif
 #endif
   } /* switch */
+#if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
+  if(val != '0') {
+	  RAPP_SendPayloadDataBlock(val, sizeof(val), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_IS_ACK);
+	  val = '0';
+#if PL_CONFIG_HAS_SHELL
+	  SHELL_SendString("command sent!\r\n");
+#endif
+  }
+#endif
 }
 #endif /* PL_CONFIG_HAS_EVENTS */
 
