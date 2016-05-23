@@ -297,10 +297,10 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
 
         #endif
         /* filter noise around zero */
-        if (x>-5 && x<5) {
+        if (x>-4 && x<4) {
           x = 0;
         }
-        if (y>-5 && y<5) {
+        if (y>-4 && y<4) {
           y = 0;
         }
         x1000 = scaleJoystickTo1K(x);
