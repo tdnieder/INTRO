@@ -110,7 +110,7 @@ void APP_EventHandler(EVNT_Handle event) {
     SHELL_SendString("SW6 pressed\r\n");
 
 	#if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
-    val = 'F';
+    val ='F';
     #endif
 
     break;
@@ -130,7 +130,7 @@ void APP_EventHandler(EVNT_Handle event) {
   } /* switch */
 #if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
   if(val != '0') {
-	  RAPP_SendPayloadDataBlock(&val, sizeof(val), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_NONE);
+	  RAPP_SendPayloadDataBlock((uint8_t *)&val, sizeof(val), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_NONE);
 	  val = '0';
 	#if PL_CONFIG_HAS_SHELL
 	  SHELL_SendString("command sent!\r\n");
