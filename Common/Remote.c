@@ -35,7 +35,12 @@
 #if PL_CONFIG_HAS_SHELL
   #include "Shell.h"
 #endif
-
+#if PL_CONFIG_HAS_BUZZER
+	#include "Buzzer.h"
+#endif
+#if PL_CONFIG_HAS_LINE_FOLLOW
+	#include "LineFollow.h"
+#endif
 static bool REMOTE_isOn = FALSE;
 static bool REMOTE_isVerbose = FALSE;
 static bool REMOTE_useJoystick = TRUE;
@@ -128,7 +133,7 @@ static void RemoteTask (void *pvParameters) {
           UTIL1_strcat(txtBuf, sizeof(txtBuf), (unsigned char*)"\r\n");
           SHELL_SendString(txtBuf);
         }
-        (void)RAPP_SendPayloadDataBlock(buf, sizeof(buf), RAPP_MSG_TYPE_JOYSTICK_XY, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_REQ_ACK);
+        (void)RAPP_SendPayloadDataBlock(buf, sizeof(buf), RAPP_MSG_TYPE_JOYSTICK_XY, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_NONE/*RPHY_PACKET_FLAGS_REQ_ACK no ack used*/);
         //LED1_Neg();
       }
 #endif

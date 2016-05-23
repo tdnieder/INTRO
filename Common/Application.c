@@ -38,6 +38,10 @@ void APP_EventHandler(EVNT_Handle event) {
 
 	#if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
     val = 'A';
+    RAPP_SendPayloadDataBlock(val, sizeof(val), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_NONE);
+	#if PL_CONFIG_HAS_SHELL
+    	  SHELL_SendString("command sent!\r\n");
+    #endif
     #endif
 
     #if PL_CONFIG_HAS_BUZZER
@@ -123,21 +127,24 @@ void APP_EventHandler(EVNT_Handle event) {
 
 	#if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
     val = 'K';
+    	  RAPP_SendPayloadDataBlock(val, sizeof(val), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_NONE);
+    #if PL_CONFIG_HAS_SHELL
+    	  SHELL_SendString("command sent!\r\n");
     #endif
-
+	#endif
     break;
   #endif
 #endif
   } /* switch */
-#if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
+/*#if (PL_CONFIG_CONTROL_SENDER && PL_CONFIG_HAS_REMOTE)
   if(val != '0') {
-	  RAPP_SendPayloadDataBlock(val, sizeof(val), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_IS_ACK);
+	  RAPP_SendPayloadDataBlock(val, sizeof(val), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_NONE);
 	  val = '0';
-#if PL_CONFIG_HAS_SHELL
+	#if PL_CONFIG_HAS_SHELL
 	  SHELL_SendString("command sent!\r\n");
-#endif
+	#endif
   }
-#endif
+  #endif*/
 }
 #endif /* PL_CONFIG_HAS_EVENTS */
 
