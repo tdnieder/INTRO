@@ -66,6 +66,10 @@
 #if PL_CONFIG_HAS_TURN
 	#include "Turn.h"
 #endif
+#if PL_CONFIG_HAS_LINE_MAZE
+	#include "Maze.h"
+#endif
+
 
 
 void PL_Init(void) {
@@ -129,6 +133,9 @@ void PL_Init(void) {
 #if PL_CONFIG_HAS_TURN
 	TURN_Init();
 #endif
+#if PL_CONFIG_HAS_LINE_MAZE
+	MAZE_Init();
+#endif
 }
 
 void PL_Deinit(void) {
@@ -191,5 +198,8 @@ REF_Deinit();
 #endif
 #if PL_CONFIG_HAS_TURN
   TURN_Deinint();
+#endif
+#if PL_CONFIG_HAS_LINE_MAZE
+  MAZE_Deinit();
 #endif
 }
