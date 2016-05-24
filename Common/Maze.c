@@ -15,6 +15,7 @@
 #include "Shell.h"
 #include "Reflectance.h"
 
+
 #define MAZE_MIN_LINE_VAL      0x60   /* minimum value indicating a line */
 static uint16_t SensorHistory[REF_NOF_SENSORS]; /* value of history while moving forward */
 
@@ -249,10 +250,9 @@ void MAZE_SimplifyPath(void) {
 	} while (counter != 0);
 }
 
-/*!
+/*
  * \brief Performs a turn.
- * \return Returns TRUE while turn is still in progress.
- */
+ * \return Returns TRUE while turn is still in progress. */
 uint8_t MAZE_EvaluteTurn(bool *finished, bool rule) {
 	REF_LineKind historyLineKind, currLineKind;
 	TURN_Kind turn;

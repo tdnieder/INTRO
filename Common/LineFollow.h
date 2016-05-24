@@ -18,12 +18,13 @@ uint8_t LF_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdI
 #endif
 
 void LF_StartFollowing(void);
+void LF_SetRule(bool newRule);
 void LF_StopFollowing(void);
 void LF_StartStopFollowing(void);
 bool LF_IsFollowing(void);
-
 void LF_Init(void);
 void LF_Deinit(void);
+bool FollowSegment(void);
 
 #endif /* PL_CONFIG_HAS_LINE_FOLLOW */
 

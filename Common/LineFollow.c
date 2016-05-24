@@ -39,11 +39,20 @@ typedef enum {
   STATE_STOP               /* stop the engines */
 } StateType;
 
+static bool rule = TRUE; /* True for left hand on the wall, false for right hand on the wall */
+
+
+
+void LF_SetRule(bool newRule){
+	rule = newRule;
+}
+
 /* task notification bits */
 #define LF_START_FOLLOWING (1<<0)  /* start line following */
 #define LF_STOP_FOLLOWING  (1<<1)  /* stop line following */
 
 static volatile StateType LF_currState = STATE_IDLE;
+static volatile bool LF_stopIt = FALSE;
 static xTaskHandle LFTaskHandle;
 #if PL_CONFIG_HAS_LINE_MAZE
 static uint8_t LF_solvedIdx = 0; /*  index to iterate through the solution, zero is the solution start index */
@@ -73,7 +82,7 @@ static void StateMachine(void);
  * \brief follows a line segment.
  * \return Returns TRUE if still on line segment
  */
-static bool FollowSegment(void) {
+bool FollowSegment(void) {
   uint16_t currLine;
   REF_LineKind currLineKind;
 
