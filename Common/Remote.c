@@ -339,12 +339,8 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
       } else if (val =='B'){ /* yellow 'B' button */
     	  SHELL_SendString("Right hand rule!\r\n");
     	  LF_SetRule(FALSE);
-      } else if (val=='E') { /* button 'E' pressed */
-    	  SHELL_SendString("Stop Following! \r\n");
-    	  if(LF_IsFollowing()){
-    		  LF_StopFollowing();
-    	  }
-      } else if (val=='D') { /* blue 'D' button */
+      }
+      else if (val=='D') { /* blue 'D' button */
     	  SHELL_SendString("Left hand rule!\r\n");
     	  LF_SetRule(TRUE);
       }

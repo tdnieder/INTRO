@@ -24,7 +24,7 @@
   #include "Drive.h"
 #endif
 
-#define TURN_STEPS_90         500
+#define TURN_STEPS_90         660
   /*!< number of steps for a 90 degree turn */
 #define TURN_STEPS_LINE       150
   /*!< number of steps stepping over the line */
@@ -308,6 +308,7 @@ uint8_t TURN_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_St
 #endif /* PL_CONFIG_HAS_SHELL */
 
 void TURN_Deinit(void) {
+
 }
 
 void TURN_Init(void) {

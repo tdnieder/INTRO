@@ -12,12 +12,11 @@
 #include "Shell.h"
 #include "Motor.h"
 #include "Reflectance.h"
-#if PL_CONFIG_HAS_TURN
-  #include "Turn.h"
-#endif
+#include "Turn.h"
 #include "WAIT1.h"
 #include "Pid.h"
 #include "Drive.h"
+#include "Turn.h"
 #include "Shell.h"
 #if PL_CONFIG_HAS_BUZZER
   #include "Buzzer.h"
@@ -26,7 +25,7 @@
   #include "Drive.h"
 #endif
 #if PL_CONFIG_HAS_LINE_MAZE
-  #include "Maze.h"
+	#include "Maze.h"
 #endif
 
 #define LINE_DEBUG      1   /* careful: this will slow down the PID loop frequency! */
@@ -36,47 +35,36 @@ typedef enum {
   STATE_FOLLOW_SEGMENT,    /* line following segment, going forward */
   STATE_TURN,              /* reached an intersection, turning around */
   STATE_FINISHED,          /* reached finish area */
-  STATE_STOP               /* stop the engines */
+  STATE_STOP,              /* stop the engines */
+  STATE_GOHOME			   /* found way, go back to start */
 } StateType;
 
 static bool rule = TRUE; /* True for left hand on the wall, false for right hand on the wall */
 
-
+static volatile StateType LF_currState = STATE_IDLE;
+static volatile bool LF_stopIt = FALSE;
 
 void LF_SetRule(bool newRule){
 	rule = newRule;
 }
 
-/* task notification bits */
-#define LF_START_FOLLOWING (1<<0)  /* start line following */
-#define LF_STOP_FOLLOWING  (1<<1)  /* stop line following */
-
-static volatile StateType LF_currState = STATE_IDLE;
-static volatile bool LF_stopIt = FALSE;
-static xTaskHandle LFTaskHandle;
-#if PL_CONFIG_HAS_LINE_MAZE
-static uint8_t LF_solvedIdx = 0; /*  index to iterate through the solution, zero is the solution start index */
-#endif
-
-
 void LF_StartFollowing(void) {
-  (void)xTaskNotify(LFTaskHandle, LF_START_FOLLOWING, eSetBits);
+  PID_Start();
+  LF_currState = STATE_FOLLOW_SEGMENT;
+  DRV_SetMode(DRV_MODE_NONE); /* disable any drive mode */
 }
 
 void LF_StopFollowing(void) {
-  (void)xTaskNotify(LFTaskHandle, LF_STOP_FOLLOWING, eSetBits);
+  LF_stopIt = TRUE;
+  LF_currState = STATE_IDLE;
 }
-
-void LF_StartStopFollowing(void) {
-  if (LF_IsFollowing()) {
-    (void)xTaskNotify(LFTaskHandle, LF_STOP_FOLLOWING, eSetBits);
-  } else {
-    (void)xTaskNotify(LFTaskHandle, LF_START_FOLLOWING, eSetBits);
-  }
-}
-
 
 static void StateMachine(void);
+
+static void ChangeState(StateType newState) {
+  LF_currState = newState;
+  StateMachine(); /* need to handle new state */
+}
 
 /*!
  * \brief follows a line segment.
@@ -97,39 +85,38 @@ bool FollowSegment(void) {
 }
 
 static void StateMachine(void) {
+	bool finished = FALSE;
   switch (LF_currState) {
     case STATE_IDLE:
       break;
     case STATE_FOLLOW_SEGMENT:
-      if (!FollowSegment()) {
-    #if PL_CONFIG_HAS_LINE_MAZE
-        LF_currState = STATE_TURN; /* make turn */
-        SHELL_SendString((unsigned char*)"no line, turn..\r\n");
-    #else
-        LF_currState = STATE_STOP; /* stop if we do not have a line any more */
-        SHELL_SendString((unsigned char*)"No line, stopped!\r\n");
-    #endif
-      }
-      break;
-
+    	if (!FollowSegment()) {
+    		LF_currState = STATE_TURN; /* Lost line, do U-turn */
+    	}
+    	break;
     case STATE_TURN:
-      #if PL_CONFIG_HAS_LINE_MAZE
-      /*! \todo Handle maze turning? */
-      #endif /* PL_CONFIG_HAS_LINE_MAZE */
-      break;
-
+    	if(MAZE_EvaluteTurn(&finished, rule)== ERR_FAILED){
+    		LF_currState = STATE_STOP;
+    	    break;
+    	}
+    	if(finished == TRUE){
+    	   	LF_currState = STATE_FINISHED;
+    	}
+    	else {
+    		LF_currState = STATE_FOLLOW_SEGMENT;
+    		break;
+    	}
     case STATE_FINISHED:
-      #if PL_CONFIG_HAS_LINE_MAZE
-      /*! \todo Handle maze finished? */
-      #endif /* PL_CONFIG_HAS_LINE_MAZE */
-      break;
+    	TURN_Turn(TURN_RIGHT180, NULL); /*to do: U-Turn invert track go back */
+    	//SHELL_SendString("LINE: Finished!\r\n");
+    	MAZE_SetSolved();
+    	LF_currState=STATE_FOLLOW_SEGMENT;
+    	break;
     case STATE_STOP:
-      SHELL_SendString("Stopped!\r\n");
-#if PL_CONFIG_HAS_TURN
-      TURN_Turn(TURN_STOP, NULL);
-#endif
-      LF_currState = STATE_IDLE;
-      break;
+    	//SHELL_SendString("LINE: Stop!\r\n");
+    	TURN_Turn(TURN_STOP, NULL);
+    	LF_currState = STATE_IDLE;
+    	break;
   } /* switch */
 }
 
@@ -138,21 +125,14 @@ bool LF_IsFollowing(void) {
 }
 
 static void LineTask (void *pvParameters) {
-  uint32_t notifcationValue;
-
   (void)pvParameters; /* not used */
   for(;;) {
-    (void)xTaskNotifyWait(0UL, LF_START_FOLLOWING|LF_STOP_FOLLOWING, &notifcationValue, 0); /* check flags */
-    if (notifcationValue&LF_START_FOLLOWING) {
-      DRV_SetMode(DRV_MODE_NONE); /* disable any drive mode */
-      PID_Start();
-      LF_currState = STATE_FOLLOW_SEGMENT;
-    }
-    if (notifcationValue&LF_STOP_FOLLOWING) {
-      LF_currState = STATE_STOP;
+    if (LF_stopIt) {
+      ChangeState(STATE_STOP);
+      LF_stopIt = FALSE;
     }
     StateMachine();
-    FRTOS1_vTaskDelay(5/portTICK_PERIOD_MS);
+    FRTOS1_vTaskDelay(5/portTICK_RATE_MS);
   }
 }
 
@@ -168,19 +148,19 @@ static void LF_PrintStatus(const CLS1_StdIOType *io) {
     case STATE_IDLE: 
       CLS1_SendStatusStr((unsigned char*)"  state", (unsigned char*)"IDLE\r\n", io->stdOut);
       break;
-    case STATE_FOLLOW_SEGMENT: 
+    case STATE_FOLLOW_SEGMENT:
       CLS1_SendStatusStr((unsigned char*)"  state", (unsigned char*)"FOLLOW_SEGMENT\r\n", io->stdOut);
       break;
-    case STATE_STOP: 
+    case STATE_STOP:
       CLS1_SendStatusStr((unsigned char*)"  state", (unsigned char*)"STOP\r\n", io->stdOut);
       break;
-    case STATE_TURN: 
+    case STATE_TURN:
       CLS1_SendStatusStr((unsigned char*)"  state", (unsigned char*)"TURN\r\n", io->stdOut);
       break;
-    case STATE_FINISHED: 
+    case STATE_FINISHED:
       CLS1_SendStatusStr((unsigned char*)"  state", (unsigned char*)"FINISHED\r\n", io->stdOut);
       break;
-    default: 
+    default:
       CLS1_SendStatusStr((unsigned char*)"  state", (unsigned char*)"UNKNOWN\r\n", io->stdOut);
       break;
   } /* switch */
@@ -196,7 +176,9 @@ uint8_t LF_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdI
     LF_PrintStatus(io);
     *handled = TRUE;
   } else if (UTIL1_strcmp((char*)cmd, (char*)"line start")==0) {
-    LF_StartFollowing();
+    if(!LF_IsFollowing()){
+    	LF_StartFollowing();
+    }
     *handled = TRUE;
   } else if (UTIL1_strcmp((char*)cmd, (char*)"line stop")==0) {
     LF_StopFollowing();
@@ -211,7 +193,7 @@ void LF_Deinit(void) {
 
 void LF_Init(void) {
   LF_currState = STATE_IDLE;
-  if (FRTOS1_xTaskCreate(LineTask, "Line", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+2, &LFTaskHandle) != pdPASS) {
+  if (FRTOS1_xTaskCreate(LineTask, "Line", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+2, NULL) != pdPASS) {
     for(;;){} /* error */
   }
 }

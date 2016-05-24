@@ -69,9 +69,6 @@
 #if PL_CONFIG_HAS_REMOTE
   #include "Remote.h"
 #endif
-#if PL_CONFIG_HAS_TURN
-	#include "Turn.h"
-#endif
 #if PL_CONFIG_HAS_LINE_MAZE
   #include "Maze.h"
 #endif
@@ -141,9 +138,6 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 #endif
 #if PL_CONFIG_HAS_REMOTE
   REMOTE_ParseCommand,
-#endif
-#if PL_CONFIG_HAS_TURN
-  TURN_ParseCommand,
 #endif
 #if PL_CONFIG_HAS_LINE_MAZE
   MAZE_ParseCommand,
