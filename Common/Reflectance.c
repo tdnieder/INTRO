@@ -1,10 +1,11 @@
-/**
- * \file
- * \brief Reflectance sensor driver implementation.
- * \author Erich Styger, erich.styger@hslu.ch
+/*
+ * Reflectance.c
  *
- * This module implements the driver for the bot front sensor.
+ *  Created on: 06.11.2015
+ *      Author: Roger
  */
+
+
 
 #include "Platform.h"
 #if PL_CONFIG_HAS_REFLECTANCE
@@ -26,13 +27,17 @@
 #if PL_CONFIG_HAS_BUZZER
   #include "Buzzer.h"
 #endif
+#if PL_CONFIG_HAS_NVM
+	#include "NVM_Config.h"
+#endif
 
 #define REF_NOF_SENSORS       6 /* number of sensors */
 #define REF_SENSOR1_IS_LEFT   1 /* sensor number one is on the left side */
+#define REF_MIN_LINE_VAL      0x100   /* minimum value indicating a line */
 #define REF_MIN_NOISE_VAL     0x40   /* values below this are not added to the weighted sum */
 #define REF_USE_WHITE_LINE    0  /* if set to 1, then the robot is using a white (on black) line, otherwise a black (on white) line */
 
-#define REF_START_STOP_CALIB      1 /* start/stop calibration commands */
+#define REF_START_STOP_CALIB	1 /* start/stop calibration commands */
 
 #if REF_START_STOP_CALIB
   static xSemaphoreHandle REF_StartStopSem = NULL;
@@ -58,7 +63,7 @@ typedef struct SensorFctType_ {
 } SensorFctType;
 
 typedef uint16_t SensorTimeType;
-#define MAX_SENSOR_VALUE  ((SensorTimeType)-1)
+#define MAX_SENSOR_VALUE  7000 //((SensorTimeType)-1)
 
 /* calibration min/max values */
 typedef struct SensorCalibT_ {
@@ -138,7 +143,6 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
   uint8_t cnt; /* number of sensor */
   uint8_t i;
   RefCnt_TValueType timerVal;
-  /*! \todo Consider reentrancy and mutual exclusion! */
 
   LED_IR_On(); /* IR LED's on */
   WAIT1_Waitus(200);
@@ -151,33 +155,31 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
   for(i=0;i<REF_NOF_SENSORS;i++) {
     SensorFctArray[i].SetInput(); /* turn I/O line as input */
   }
+  FRTOS1_taskENTER_CRITICAL();
   (void)RefCnt_ResetCounter(timerHandle); /* reset timer counter */
   do {
-	EnterCritical();
+	cnt = 0;
     timerVal = RefCnt_GetCounterValue(timerHandle);
-    if (timerVal>0x5000) { /*! \todo You might need to adjust this! */
-      ExitCritical();
-      break; /* timeout */
-
-    }
-    cnt = 0;
     for(i=0;i<REF_NOF_SENSORS;i++) {
       if (raw[i]==MAX_SENSOR_VALUE) { /* not measured yet? */
         if (SensorFctArray[i].GetVal()==0) {
           raw[i] = timerVal;
         }
-        } else { /* have value */
+      } else { /* have value */
         cnt++;
       }
     }
-    ExitCritical();
+    if (timerVal > MAX_SENSOR_VALUE) {/*5ms*/
+    	break;
+    }
   } while(cnt!=REF_NOF_SENSORS);
+  FRTOS1_taskEXIT_CRITICAL();
   LED_IR_Off(); /* IR LED's off */
 }
 
 static void REF_CalibrateMinMax(SensorTimeType min[REF_NOF_SENSORS], SensorTimeType max[REF_NOF_SENSORS], SensorTimeType raw[REF_NOF_SENSORS]) {
   int i;
-  
+
   REF_MeasureRaw(raw);
   for(i=0;i<REF_NOF_SENSORS;i++) {
     if (raw[i] < min[i]) {
@@ -192,7 +194,6 @@ static void REF_CalibrateMinMax(SensorTimeType min[REF_NOF_SENSORS], SensorTimeT
 static void ReadCalibrated(SensorTimeType calib[REF_NOF_SENSORS], SensorTimeType raw[REF_NOF_SENSORS]) {
   int i;
   int32_t x, denominator;
-
   REF_MeasureRaw(raw);
   for(i=0;i<REF_NOF_SENSORS;i++) {
     x = 0;
@@ -269,7 +270,7 @@ uint16_t REF_GetLineValue(void) {
 static REF_LineKind ReadLineKind(SensorTimeType val[REF_NOF_SENSORS]) {
   uint32_t sum, sumLeft, sumRight, outerLeft, outerRight;
   int i;
-  #define REF_MIN_LINE_VAL      0x60   /* minimum value indicating a line */
+  /* #define REF_MIN_LINE_VAL      0x100 */   /* minimum value indicating a line */
 
   for(i=0;i<REF_NOF_SENSORS;i++) {
     if (val[i]<REF_MIN_LINE_VAL) { /* smaller value? White seen! */
@@ -310,13 +311,13 @@ static REF_LineKind ReadLineKind(SensorTimeType val[REF_NOF_SENSORS]) {
   #define MIN_LEFT_RIGHT_SUM   ((REF_NOF_SENSORS*1000)/4) /* 1/4 of full sensor values */
 
   if (outerLeft>=REF_MIN_LINE_VAL && outerRight<REF_MIN_LINE_VAL && sumLeft>MIN_LEFT_RIGHT_SUM && sumRight<MIN_LEFT_RIGHT_SUM) {
-#if PL_APP_LINE_MAZE
+#if PL_CONFIG_HAS_LINE_MAZE
     return REF_LINE_LEFT; /* line going to the left side */
 #else
     return REF_LINE_STRAIGHT;
 #endif
   } else if (outerLeft<REF_MIN_LINE_VAL && outerRight>=REF_MIN_LINE_VAL && sumRight>MIN_LEFT_RIGHT_SUM && sumLeft<MIN_LEFT_RIGHT_SUM) {
-#if PL_APP_LINE_MAZE
+#if PL_CONFIG_HAS_LINE_MAZE
     return REF_LINE_RIGHT; /* line going to the right side */
 #else
     return REF_LINE_STRAIGHT;
@@ -352,6 +353,10 @@ static uint8_t PrintHelp(const CLS1_StdIOType *io) {
   CLS1_SendHelpStr((unsigned char*)"  help|status", (unsigned char*)"Print help or status information\r\n", io->stdOut);
 #if REF_START_STOP_CALIB
   CLS1_SendHelpStr((unsigned char*)"  calib (start|stop)", (unsigned char*)"Start/Stop calibrating while moving sensor over line\r\n", io->stdOut);
+#endif
+#if PL_CONFIG_HAS_NVM
+  CLS1_SendHelpStr((unsigned char*)"  save", (unsigned char*)"Save calib data to FLASH\r\n", io->stdOut);
+  CLS1_SendHelpStr((unsigned char*)"  load", (unsigned char*)"Load calib data from FLASH\r\n", io->stdOut);
 #endif
   return ERR_OK;
 }
@@ -394,7 +399,7 @@ static uint8_t PrintStatus(const CLS1_StdIOType *io) {
   int i;
 
   CLS1_SendStatusStr((unsigned char*)"reflectance", (unsigned char*)"\r\n", io->stdOut);
-  
+
   CLS1_SendStatusStr((unsigned char*)"  state", REF_GetStateString(), io->stdOut);
   CLS1_SendStr((unsigned char*)"\r\n", io->stdOut);
 
@@ -402,6 +407,16 @@ static uint8_t PrintStatus(const CLS1_StdIOType *io) {
   UTIL1_strcatNum16Hex(buf, sizeof(buf), REF_MIN_NOISE_VAL);
   UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
   CLS1_SendStatusStr((unsigned char*)"  min noise", buf, io->stdOut);
+
+  /*UTIL1_strcpy(buf, sizeof(buf), (unsigned char*)"0x");
+  UTIL1_strcatNum16Hex(buf, sizeof(buf), REF_MIN_LINE_VAL);
+  UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
+  CLS1_SendStatusStr((unsigned char*)"  min line", buf, io->stdOut);
+*/
+  CLS1_SendStatusStr((unsigned char*)"  line val", (unsigned char*)"", io->stdOut);
+  buf[0] = '\0'; UTIL1_strcatNum16s(buf, sizeof(buf), refCenterLineVal);
+  CLS1_SendStr(buf, io->stdOut);
+  CLS1_SendStr((unsigned char*)"\r\n", io->stdOut);
 
   CLS1_SendStatusStr((unsigned char*)"  raw val", (unsigned char*)"", io->stdOut);
   for (i=0;i<REF_NOF_SENSORS;i++) {
@@ -414,7 +429,7 @@ static uint8_t PrintStatus(const CLS1_StdIOType *io) {
     CLS1_SendStr(buf, io->stdOut);
   }
   CLS1_SendStr((unsigned char*)"\r\n", io->stdOut);
-  
+
   CLS1_SendStatusStr((unsigned char*)"  min val", (unsigned char*)"", io->stdOut);
   for (i=0;i<REF_NOF_SENSORS;i++) {
     if (i==0) {
@@ -437,7 +452,7 @@ static uint8_t PrintStatus(const CLS1_StdIOType *io) {
     CLS1_SendStr(buf, io->stdOut);
   }
   CLS1_SendStr((unsigned char*)"\r\n", io->stdOut);
- 
+
   CLS1_SendStatusStr((unsigned char*)"  calib val", (unsigned char*)"", io->stdOut);
   for (i=0;i<REF_NOF_SENSORS;i++) {
     if (i==0) {
@@ -490,28 +505,75 @@ byte REF_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOT
     return ERR_OK;
 #endif
   }
+#if PL_CONFIG_HAS_NVM
+  else if (UTIL1_strcmp((char*)cmd, "ref save")==0){
+	  if(refState==REF_STATE_READY){
+		  REF_saveCalibData();
+	  }
+	  else {
+		  CLS1_SendStr((unsigned char*)"ERROR: can only save if calibrated.\r\n", io->stdErr);
+		  return ERR_FAILED;
+	  }
+	  *handled = TRUE;
+	  return ERR_OK;
+  }
+  else if (UTIL1_strcmp((char*)cmd, "ref load")==0){
+  	  REF_loadCalibData();
+  	  *handled = TRUE;
+  	  return ERR_OK;
+    }
+#endif
   return ERR_OK;
 }
+
+#if PL_CONFIG_HAS_NVM
+void REF_saveCalibData(void){
+	if(NVMC_SaveReflectanceData(&SensorCalibMinMax, sizeof(SensorCalibMinMax)) == ERR_OK){
+		SHELL_SendString("Successfully saved ref calibration data!\r\n");
+	} else {
+		SHELL_SendString("Error occured trying to safe calibration data!\r\n");
+	}
+}
+
+void REF_loadCalibData(void){
+	SensorCalibMinMax = *((SensorCalibT*)NVMC_GetReflectanceData());
+	refState=REF_STATE_READY;
+}
+#endif
 
 static void REF_StateMachine(void) {
   int i;
 
   switch (refState) {
     case REF_STATE_INIT:
+    #if PL_CONFIG_EST
+    {
+      SensorCalibT *ptr;
+
+      ptr = (SensorCalibT*)NVMC_GetReflectanceData();
+      if (ptr!=NULL) { /* valid data */
+        SensorCalibMinMax = *ptr;
+        refState = REF_STATE_READY;
+      } else {
+        refState = REF_STATE_NOT_CALIBRATED;
+      }
+    }
+    #else
       SHELL_SendString((unsigned char*)"INFO: No calibration data present.\r\n");
       refState = REF_STATE_NOT_CALIBRATED;
+    #endif
       break;
       
     case REF_STATE_NOT_CALIBRATED:
       REF_MeasureRaw(SensorRaw);
-      /*! \todo You might add a new event to your event module...*/
-#if REF_START_STOP_CALIB
-      if (FRTOS1_xSemaphoreTake(REF_StartStopSem, 0)==pdTRUE) {
-        refState = REF_STATE_START_CALIBRATION;
-      }
-#endif
+	  #if REF_START_STOP_CALIB
+      	  if (FRTOS1_xSemaphoreTake(REF_StartStopSem, 0)==pdTRUE) {
+      		  refState = REF_STATE_START_CALIBRATION;
+      	  }
+	  #endif
+      //EVNT_SetEvent(EVNT_START_CALIB);
       break;
-    
+
     case REF_STATE_START_CALIBRATION:
       SHELL_SendString((unsigned char*)"start calibration...\r\n");
       for(i=0;i<REF_NOF_SENSORS;i++) {
@@ -521,7 +583,7 @@ static void REF_StateMachine(void) {
       }
       refState = REF_STATE_CALIBRATING;
       break;
-    
+
     case REF_STATE_CALIBRATING:
       REF_CalibrateMinMax(SensorCalibMinMax.minVal, SensorCalibMinMax.maxVal, SensorRaw);
 #if PL_CONFIG_HAS_BUZZER
@@ -533,12 +595,19 @@ static void REF_StateMachine(void) {
       }
 #endif
       break;
-    
+
     case REF_STATE_STOP_CALIBRATION:
       SHELL_SendString((unsigned char*)"...stopping calibration.\r\n");
+#if PL_CONFIG_EST
+      if (NVMC_SaveReflectanceData(&SensorCalibMinMax, sizeof(SensorCalibMinMax))!=ERR_OK) {
+        SHELL_SendString((unsigned char*)"Flashing calibration data FAILED!\r\n");
+      } else {
+        SHELL_SendString((unsigned char*)"Stored calibration data.\r\n");
+      }
+#endif
       refState = REF_STATE_READY;
       break;
-        
+
     case REF_STATE_READY:
       REF_Measure();
 #if REF_START_STOP_CALIB
@@ -556,9 +625,10 @@ bool REF_IsReady(void) {
 
 static void ReflTask (void *pvParameters) {
   (void)pvParameters; /* not used */
+//  SQUEUE_SendString("Reflectance task started!\r\n");
   for(;;) {
     REF_StateMachine();
-    FRTOS1_vTaskDelay(10/portTICK_PERIOD_MS);
+    FRTOS1_vTaskDelay(10/portTICK_RATE_MS);
   }
 }
 

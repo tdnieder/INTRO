@@ -1,9 +1,10 @@
 /*
- * Maze.c
+ r * Maze.c
  *
- *  Created on: Mar 11, 2013
- *      Author: Erich Styger
+ *  Created on: Dec 2, 2015
+ *      Author: daniel
  */
+
 #include "Platform.h"
 #if PL_CONFIG_HAS_LINE_MAZE
 #include "Maze.h"
@@ -15,65 +16,63 @@
 #include "Shell.h"
 #include "Reflectance.h"
 
-
-#define MAZE_MIN_LINE_VAL      0x60   /* minimum value indicating a line */
+#define MAZE_MIN_LINE_VAL      0x100   /* minimum value indicating a line */
 static uint16_t SensorHistory[REF_NOF_SENSORS]; /* value of history while moving forward */
 
 static void MAZE_SampleSensorHistory(void) {
-  uint8_t i;
-  uint16_t val[REF_NOF_SENSORS];
+	uint8_t i;
+	uint16_t val[REF_NOF_SENSORS];
 
-  REF_GetSensorValues(&val[0], REF_NOF_SENSORS);
-  for(i=0; i<REF_NOF_SENSORS; i++) {
-    if (val[i]>=(MAZE_MIN_LINE_VAL)) { /* only count line values */
-      if (val[i]>SensorHistory[i]) {
-        SensorHistory[i] = val[i];
-      }
-    }
-  }
+	REF_GetSensorValues(&val[0], REF_NOF_SENSORS);
+	for (i = 0; i < REF_NOF_SENSORS; i++) {
+		if (val[i] >= (MAZE_MIN_LINE_VAL)) { /* only count line values */
+			if (val[i] > SensorHistory[i]) {
+				SensorHistory[i] = val[i];
+			}
+		}
+	}
 }
 
 /*!
  * \brief Called during turning, will use it to sample sensor values.
  */
 static bool MAZE_SampleTurnStopFunction(void) {
-  MAZE_SampleSensorHistory();
-  return FALSE; /* do not stop turning */
+	MAZE_SampleSensorHistory();
+	return FALSE; /* do not stop turning */
 }
 
-static REF_LineKind MAZE_HistoryLineKind(void) {
-  int i, cnt, cntLeft, cntRight;
+REF_LineKind MAZE_HistoryLineKind(void) {
+	int i, cnt, cntLeft, cntRight;
 
-  cnt = cntLeft = cntRight = 0;
-  for(i=0;i<REF_NOF_SENSORS;i++) {
-    if (SensorHistory[i]>MAZE_MIN_LINE_VAL) { /* count only line values */
-      cnt++;
-      if (i<REF_NOF_SENSORS/2) {
-        cntLeft++;
-      } else {
-        cntRight++;
-      }
-    }
-  }
-  if (cnt==0) {
-    return REF_LINE_NONE;
-  } else if (cnt==REF_NOF_SENSORS) {
-    return REF_LINE_FULL;
-  } else if (cntLeft>cntRight) {
-    return REF_LINE_LEFT;
-  } else { /* must be cntRight>cntLeft */
-    return REF_LINE_RIGHT;
-  }
+	cnt = cntLeft = cntRight = 0;
+	for (i = 0; i < REF_NOF_SENSORS; i++) {
+		if (SensorHistory[i] > MAZE_MIN_LINE_VAL) { /* count only line values */
+			cnt++;
+			if (i < REF_NOF_SENSORS / 2) {
+				cntLeft++;
+			} else {
+				cntRight++;
+			}
+		}
+	}
+	if (cnt == 0) {
+		return REF_LINE_NONE;
+	} else if (cnt == REF_NOF_SENSORS) {
+		return REF_LINE_FULL;
+	} else if (cntLeft > cntRight) {
+		return REF_LINE_LEFT;
+	} else { /* must be cntRight>cntLeft */
+		return REF_LINE_RIGHT;
+	}
 }
 
 void MAZE_ClearSensorHistory(void) {
-  int i;
+	int i;
 
-  for(i=0;i<REF_NOF_SENSORS;i++) {
-    SensorHistory[i] = 0;
-  }
+	for (i = 0; i < REF_NOF_SENSORS; i++) {
+		SensorHistory[i] = 0;
+	}
 }
-
 
 #define MAZE_MAX_PATH        32 /* maximum number of turns in path */
 
@@ -179,7 +178,6 @@ void MAZE_AddPath(TURN_Kind kind) {
 		pathLength++;
 	} else {
 		/* error! */
-		for(;;){}
 	}
 }
 
@@ -250,9 +248,10 @@ void MAZE_SimplifyPath(void) {
 	} while (counter != 0);
 }
 
-/*
+/*!
  * \brief Performs a turn.
- * \return Returns TRUE while turn is still in progress. */
+ * \return Returns TRUE while turn is still in progress.
+ */
 uint8_t MAZE_EvaluteTurn(bool *finished, bool rule) {
 	REF_LineKind historyLineKind, currLineKind;
 	TURN_Kind turn;

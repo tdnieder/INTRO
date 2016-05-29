@@ -1,19 +1,22 @@
-/**
- * \file
- * \brief Module to drive the robot.
- * \author Erich Styger, erich.styger@hslu.ch
+/*
+ * Drive.c
  *
- * This module allows to drive the robot and to perform turns.
+ *  Created on: Nov 20, 2015
+ *      Author: daniel
  */
+
+
+
 #include "Platform.h"
-#if PL_CONFIG_HAS_DRIVE
+#if PL_CONFIG_HAS_DRIVE && PL_CONFIG_HAS_PID
 #include "Drive.h"
 #include "FRTOS1.h"
-#include "UTIL1.h"
-#include "Tacho.h"
 #include "Pid.h"
+#include "Tacho.h"
 #include "Motor.h"
-#include "CLS1.h"
+#if PL_CONFIG_HAS_SHELL
+  #include "CLS1.h"
+#endif
 #include "Q4CLeft.h"
 #include "Q4CRight.h"
 #include "Shell.h"
@@ -70,8 +73,6 @@ bool DRV_IsStopped(void) {
       return FALSE;
     }
     return TRUE;
-  } if (DRV_Status.mode==DRV_MODE_STOP) {
-    return TRUE;
   } else {
     /* ???? what to do otherwise ???? */
     return FALSE;
@@ -88,7 +89,7 @@ uint8_t DRV_Stop(int32_t timeoutMs) {
     timeoutMs -= 5;
   } while (timeoutMs>0);
   if (timeoutMs<0) {
-    return ERR_BUSY; /* timeout */
+    return ERR_BUSY; /* timout */
   }
   return ERR_OK;
 }
@@ -349,7 +350,7 @@ static void DriveTask(void *pvParameters) {
     } else if (DRV_Status.mode==DRV_MODE_NONE) {
       /* do nothing */
     }
-    FRTOS1_vTaskDelayUntil(&xLastWakeTime, 5/portTICK_PERIOD_MS);
+    FRTOS1_vTaskDelayUntil(&xLastWakeTime, 5/portTICK_RATE_MS);
   } /* for */
 }
 
@@ -372,4 +373,5 @@ void DRV_Init(void) {
     for(;;){} /* error */
   }
 }
+
 #endif /* PL_CONFIG_HAS_DRIVE */

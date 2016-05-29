@@ -1,9 +1,10 @@
 /*
  * LineFollow.c
  *
- *  Created on: Feb 15, 2013
- *      Author: Erich Styger
+ *  Created on: Nov 26, 2015
+ *      Author: daniel
  */
+
 #include "Platform.h"
 #if PL_CONFIG_HAS_LINE_FOLLOW
 #include "LineFollow.h"
@@ -28,7 +29,7 @@
 	#include "Maze.h"
 #endif
 
-#define LINE_DEBUG      1   /* careful: this will slow down the PID loop frequency! */
+#define LINE_DEBUG      0   /* careful: this will slow down the PID loop frequency! */
 
 typedef enum {
   STATE_IDLE,              /* idle, not doing anything */
@@ -198,3 +199,4 @@ void LF_Init(void) {
   }
 }
 #endif /* PL_CONFIG_HAS_LINE_FOLLOW */
+
