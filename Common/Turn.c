@@ -1,9 +1,10 @@
 /*
  * Turn.c
  *
- *  Created on: Mar 11, 2013
- *      Author: Erich Styger
+ *  Created on: Nov 26, 2015
+ *      Author: daniel
  */
+
 #include "Platform.h"
 #if PL_CONFIG_HAS_TURN
 #include "Turn.h"
@@ -24,15 +25,15 @@
   #include "Drive.h"
 #endif
 
-#define TURN_STEPS_90         660
+#define TURN_STEPS_90         653
   /*!< number of steps for a 90 degree turn */
-#define TURN_STEPS_LINE       150
+#define TURN_STEPS_LINE       220
   /*!< number of steps stepping over the line */
-#define TURN_STEPS_POST_LINE  80
+#define TURN_STEPS_POST_LINE  130
   /*!< number of steps after the line, before making a turn */
-#define TURN_STEPS_90_TIMEOUT_MS        1000
-#define TURN_STEPS_LINE_TIMEOUT_MS      200
-#define TURN_STEPS_POST_LINE_TIMEOUT_MS 200
+#define TURN_STEPS_90_TIMEOUT_MS        750
+#define TURN_STEPS_LINE_TIMEOUT_MS      150
+#define TURN_STEPS_POST_LINE_TIMEOUT_MS 150
 #define TURN_STEPS_STOP_TIMEOUT_MS      150
 
 static int32_t TURN_Steps90 = TURN_STEPS_90;
@@ -180,7 +181,7 @@ void TURN_TurnAngle(int16_t angle, TURN_StopFct stopIt) {
   if (isLeft) {
     angle = -angle; /* make it positive */
   }
-  angle %= 360; /* keep it inside 360° */
+  angle %= 360; /* keep it inside 360Â° */
   steps = (angle*TURN_Steps90)/90;
   if (isLeft) {
     StepsTurn(-steps, steps, stopIt, ((angle/90)+1)*TURN_STEPS_90_TIMEOUT_MS);
@@ -208,7 +209,7 @@ static void TURN_PrintStatus(const CLS1_StdIOType *io) {
   CLS1_SendStatusStr((unsigned char*)"turn", (unsigned char*)"\r\n", io->stdOut);
   UTIL1_Num32sToStr(buf, sizeof(buf), TURN_Steps90);
   UTIL1_strcat(buf, sizeof(buf), (unsigned char*)" steps\r\n");
-  CLS1_SendStatusStr((unsigned char*)"  90°", buf, io->stdOut);
+  CLS1_SendStatusStr((unsigned char*)"  90Â°", buf, io->stdOut);
 
   UTIL1_Num32sToStr(buf, sizeof(buf), TURN_StepsLine);
   UTIL1_strcat(buf, sizeof(buf), (unsigned char*)" steps\r\n");
@@ -308,7 +309,6 @@ uint8_t TURN_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_St
 #endif /* PL_CONFIG_HAS_SHELL */
 
 void TURN_Deinit(void) {
-
 }
 
 void TURN_Init(void) {
