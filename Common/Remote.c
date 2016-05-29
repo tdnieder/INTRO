@@ -41,6 +41,9 @@
 #if PL_CONFIG_HAS_LINE_FOLLOW
 	#include "LineFollow.h"
 #endif
+#if PL_CONFIG_HAS_REFLECTANCE
+	#include "Reflectance.h"
+#endif
 static bool REMOTE_isOn = FALSE;
 static bool REMOTE_isVerbose = FALSE;
 static bool REMOTE_useJoystick = TRUE;
@@ -327,6 +330,9 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         SHELL_SendString("Remote ON\r\n");
       } else if (val=='C') { /* red 'C' button */
         /*! \todo add functionality */
+#if PL_CONFIG_HAS_REFLECTANCE
+    	  REF_CalibrateStartStop();
+#endif
       }
 #if PL_CONFIG_HAS_LINE_MAZE
       else if (val=='E') { /* 'E' button */
