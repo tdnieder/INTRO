@@ -44,6 +44,9 @@
 #if PL_CONFIG_HAS_REFLECTANCE
 	#include "Reflectance.h"
 #endif
+#if PL_CONFIG_HAS_LINE_MAZE
+	#include "Maze.h"
+#endif
 static bool REMOTE_isOn = FALSE;
 static bool REMOTE_isVerbose = FALSE;
 static bool REMOTE_useJoystick = TRUE;
@@ -341,7 +344,6 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         if(!LF_IsFollowing()){
         	LF_StartFollowing();
         }
-
       } else if (val =='B'){ /* yellow 'B' button */
     	  SHELL_SendString("Right hand rule!\r\n");
     	  LF_SetRule(FALSE);
@@ -350,18 +352,7 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
     	  SHELL_SendString("Left hand rule!\r\n");
     	  LF_SetRule(TRUE);
       }
-      else if (val=='E') { /* button 'E' pressed */
-	  SHELL_SendString("Stop Following! \r\n");
-	  if(LF_IsFollowing()){
-		  LF_StopFollowing();
-	  }
 #endif
-
-
-#if PL_CONFIG_HAS_LINE_FOLLOW
-    	  LF_StartFollowing(); /* Start line follow */
-#endif
-      }
 #else
       *handled = FALSE; /* no shell and no buzzer? */
 #endif
