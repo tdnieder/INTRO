@@ -25,7 +25,7 @@
   #include "Drive.h"
 #endif
 
-#define TURN_STEPS_90         653
+#define TURN_STEPS_90         600
   /*!< number of steps for a 90 degree turn */
 #define TURN_STEPS_LINE       220
   /*!< number of steps stepping over the line */
