@@ -153,7 +153,7 @@ static void RemoteTask (void *pvParameters) {
 
 #if PL_CONFIG_HAS_MOTOR
 static void REMOTE_HandleMotorMsg(int16_t speedVal, int16_t directionVal, int16_t z) {
-  #define SCALE_DOWN 30
+  #define SCALE_DOWN 60
   #define MIN_VALUE  250 /* values below this value are ignored */
   #define DRIVE_DOWN 1
 
@@ -223,23 +223,23 @@ static int16_t scaleJoystickTo1K(int8_t val) {
   int tmp;
 
   if (val>0) {
-    tmp = ((val*10)/127)*500;
+    tmp = ((val*10)/127)*300;
   } else {
-    tmp = ((val*10)/128)*500;
+    tmp = ((val*10)/128)*300;
   }
-  if (tmp<-10000) {
-    tmp = -10000;
-  } else if (tmp>10000) {
-    tmp = 10000;
+  if (tmp<-5000) {
+    tmp = -5000;
+  } else if (tmp>5000) {
+    tmp = 5000;
   }
   return tmp;
 }
 #endif
 
 uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *data, RNWK_ShortAddrType srcAddr, bool *handled, RPHY_PacketDesc *packet) {
-#if PL_CONFIG_HAS_SHELL
+
   uint8_t buf[48];
-#endif
+
   uint8_t val;
   int16_t x, y, z;
   

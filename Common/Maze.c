@@ -74,7 +74,7 @@ void MAZE_ClearSensorHistory(void) {
 	}
 }
 
-#define MAZE_MAX_PATH        40 /* maximum number of turns in path */
+#define MAZE_MAX_PATH        128 /* maximum number of turns in path */
 
 static TURN_Kind path[MAZE_MAX_PATH]; /* recorded maze */
 static uint8_t pathLength; /* number of entries in path[] */

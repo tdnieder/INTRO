@@ -424,12 +424,12 @@ void PID_Init(void) {
   speedRightConfig.integral = 0;
 #else
   speedLeftConfig.pFactor100 = 1000;
-  speedLeftConfig.iFactor100 = 45;
+  speedLeftConfig.iFactor100 = 25;
   speedLeftConfig.dFactor100 = 0;
   speedLeftConfig.iAntiWindup = 120000;
   speedLeftConfig.lastError = 0;
   speedLeftConfig.integral = 0;
-  speedLeftConfig.maxSpeedPercent = 45;
+  speedLeftConfig.maxSpeedPercent = 49;
 
   speedRightConfig.pFactor100 = speedLeftConfig.pFactor100;
   speedRightConfig.iFactor100 = speedLeftConfig.iFactor100;
@@ -439,19 +439,19 @@ void PID_Init(void) {
   speedRightConfig.integral = 0;
   speedRightConfig.maxSpeedPercent = speedLeftConfig.maxSpeedPercent;
 #endif
-  lineFwConfig.pFactor100 = 4500;
-  lineFwConfig.iFactor100 = 10;
+  lineFwConfig.pFactor100 = 3500;
+  lineFwConfig.iFactor100 = 5;
   lineFwConfig.dFactor100 = 100;
   lineFwConfig.iAntiWindup = 120000;
   lineFwConfig.maxSpeedPercent = 30;
   lineFwConfig.lastError = 0;
   lineFwConfig.integral = 0;
 
-  posLeftConfig.pFactor100 = 1000;
-  posLeftConfig.iFactor100 = 2;
-  posLeftConfig.dFactor100 = 40;
+  posLeftConfig.pFactor100 = 600;
+  posLeftConfig.iFactor100 = 20;
+  posLeftConfig.dFactor100 = 0;
   posLeftConfig.iAntiWindup = 200;
-  posLeftConfig.maxSpeedPercent = 30;
+  posLeftConfig.maxSpeedPercent = 39;
   posLeftConfig.lastError = 0;
   posLeftConfig.integral = 0;
 
