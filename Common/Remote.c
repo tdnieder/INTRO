@@ -349,14 +349,16 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         }
       } else if (val =='B'){ /* yellow 'B' button */
     	  SHELL_SendString("Right hand rule!\r\n");
+    	  MAZE_ClearSolution();
     	  LF_SetRule(FALSE);
       }
       else if (val=='D') { /* blue 'D' button */
     	  SHELL_SendString("Left hand rule!\r\n");
+    	  MAZE_ClearSolution();
     	  LF_SetRule(TRUE);
       }
       else if (val == 'A'){
-    	  MAZE_ClearSensorHistory();
+    	  MAZE_ClearSolution();
     	  SHELL_SendString("Maze History cleared");
     	  BUZ_Beep(880, 500);
       }
