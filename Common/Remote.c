@@ -223,14 +223,14 @@ static int16_t scaleJoystickTo1K(int8_t val) {
   int tmp;
 
   if (val>0) {
-    tmp = ((val*10)/127)*700;
+    tmp = ((val*10)/127)*500;
   } else {
-    tmp = ((val*10)/128)*700;
+    tmp = ((val*10)/128)*500;
   }
-  if (tmp<-12000) {
-    tmp = -12000;
-  } else if (tmp>14000) {
-    tmp = 14000;
+  if (tmp<-10000) {
+    tmp = -10000;
+  } else if (tmp>10000) {
+    tmp = 10000;
   }
   return tmp;
 }
@@ -344,6 +344,9 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         if(!LF_IsFollowing()){
         	LF_StartFollowing();
         }
+        else {
+        	LF_StopFollowing();
+        }
       } else if (val =='B'){ /* yellow 'B' button */
     	  SHELL_SendString("Right hand rule!\r\n");
     	  LF_SetRule(FALSE);
@@ -351,6 +354,11 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
       else if (val=='D') { /* blue 'D' button */
     	  SHELL_SendString("Left hand rule!\r\n");
     	  LF_SetRule(TRUE);
+      }
+      else if (val == 'A'){
+    	  MAZE_ClearSensorHistory();
+    	  SHELL_SendString("Maze History cleared");
+    	  BUZ_Beep(880, 500);
       }
 #endif
 #else
